@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import type { DashboardEnrollmentState } from "../config/env";
 import { useAuth } from "../providers/AuthProvider";
-import {
-  listStudentCourses,
-  type StudentCourseItem,
-} from "../../features/student/api/studentCoursesApi";
+// [AUTH-BACKEND DISABLED] listStudentCourses import commented out — no backend connection
+// import {
+//   listStudentCourses,
+//   type StudentCourseItem,
+// } from "../../features/student/api/studentCoursesApi";
+import type { StudentCourseItem } from "../../features/student/api/studentCoursesApi";
 
 export interface DashboardEnrollment {
   id: string;
@@ -50,27 +52,30 @@ export function useDashboardEnrollment() {
       return;
     }
 
-    const controller = new AbortController();
-    setViewModel({ status: "loading", enrolledCourses: [], courses: [] });
+    // [AUTH-BACKEND DISABLED] API call to listStudentCourses commented out — no backend
+    // const controller = new AbortController();
+    // setViewModel({ status: "loading", enrolledCourses: [], courses: [] });
+    // listStudentCourses({ brand: STUDENT_DASHBOARD_BRAND, page: 1, pageSize: 25, signal: controller.signal })
+    //   .then((payload) => {
+    //     if (controller.signal.aborted) return;
+    //     const courses = [...payload.items];
+    //     const enrolledCourses = courses.filter(canOpenCourse).map(toEnrollment);
+    //     setViewModel({
+    //       status: enrolledCourses.length > 0 ? "enrolled" : "empty",
+    //       enrolledCourses,
+    //       courses,
+    //     });
+    //   })
+    //   .catch(() => {
+    //     if (controller.signal.aborted) return;
+    //     setViewModel({ status: "error", enrolledCourses: [], courses: [] });
+    //   });
+    // return () => controller.abort();
 
-    listStudentCourses({ brand: STUDENT_DASHBOARD_BRAND, page: 1, pageSize: 25, signal: controller.signal })
-      .then((payload) => {
-        if (controller.signal.aborted) return;
-        const courses = [...payload.items];
-        const enrolledCourses = courses.filter(canOpenCourse).map(toEnrollment);
-        setViewModel({
-          status: enrolledCourses.length > 0 ? "enrolled" : "empty",
-          enrolledCourses,
-          courses,
-        });
-      })
-      .catch(() => {
-        if (controller.signal.aborted) return;
-
-        setViewModel({ status: "error", enrolledCourses: [], courses: [] });
-      });
-
-    return () => controller.abort();
+    // Stub: always show empty when authenticated but backend is disabled
+    void STUDENT_DASHBOARD_BRAND; // prevent unused warning
+    void canOpenCourse; void toEnrollment; // prevent unused warnings
+    setViewModel({ status: "empty", enrolledCourses: [], courses: [] });
   }, [auth, auth.status, retryIndex]);
 
   return { ...viewModel, retry };

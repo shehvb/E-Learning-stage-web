@@ -1,5 +1,8 @@
 export interface EnvConfig {
   apiBaseUrl: string;
+  // [AUTH-BACKEND DISABLED] Supabase credentials commented out
+  // supabaseUrl: string;
+  // supabasePublishableKey: string;
   supabaseUrl: string;
   supabasePublishableKey: string;
   adminDataSource: AdminDataSource;
@@ -39,8 +42,11 @@ function normalizeDashboardEnrollmentState(value: string | undefined) {
 
 export const env: Readonly<EnvConfig> = Object.freeze({
   apiBaseUrl: normalizeUrl(import.meta.env.VITE_API_BASE_URL),
-  supabaseUrl: normalizeUrl(import.meta.env.VITE_SUPABASE_URL),
-  supabasePublishableKey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ?? "",
+  // [AUTH-BACKEND DISABLED] Supabase credentials commented out — always empty strings
+  // supabaseUrl: normalizeUrl(import.meta.env.VITE_SUPABASE_URL),
+  // supabasePublishableKey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() ?? "",
+  supabaseUrl: "",
+  supabasePublishableKey: "",
   adminDataSource: normalizeAdminDataSource(import.meta.env.VITE_ADMIN_DATA_SOURCE),
   dashboardEnrollmentState: normalizeDashboardEnrollmentState(
     import.meta.env.VITE_DASHBOARD_ENROLLMENT_STATE,

@@ -6,7 +6,8 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
-import { clearSupabaseSession, isSupabaseAuthConfigured, restoreSupabaseSession, signInWithSupabasePassword, type SupabaseAuthenticatedUser } from "../../features/auth/api/supabaseAuth";
+// [AUTH-BACKEND DISABLED] Supabase auth import commented out — no backend connection
+// import { clearSupabaseSession, isSupabaseAuthConfigured, restoreSupabaseSession, signInWithSupabasePassword, type SupabaseAuthenticatedUser } from "../../features/auth/api/supabaseAuth";
 
 export interface AuthUser {
   id: string;
@@ -22,49 +23,55 @@ export interface AuthState {
   signOut(): void;
 }
 
-function toAuthUser(user: SupabaseAuthenticatedUser): AuthUser {
-  return { id: user.id, name: user.email ?? "Authenticated user", role: "authenticated" };
-}
+// [AUTH-BACKEND DISABLED] toAuthUser helper commented out (was used to map SupabaseAuthenticatedUser)
+// function toAuthUser(user: SupabaseAuthenticatedUser): AuthUser {
+//   return { id: user.id, name: user.email ?? "Authenticated user", role: "authenticated" };
+// }
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [status, setStatus] = useState<AuthState["status"]>("loading");
+  const [status, setStatus] = useState<AuthState["status"]>("unauthenticated");
   const [user, setUser] = useState<AuthUser | null>(null);
-  const configured = isSupabaseAuthConfigured();
+
+  // [AUTH-BACKEND DISABLED] Supabase configuration check commented out
+  // const configured = isSupabaseAuthConfigured();
+  const configured = false;
+
+  // [AUTH-BACKEND DISABLED] Session restore effect commented out — was calling Supabase backend
+  // useEffect(() => {
+  //   let active = true;
+  //   if (!configured) {
+  //     setStatus("unauthenticated");
+  //     return () => { active = false; };
+  //   }
+  //   void restoreSupabaseSession().then((session) => {
+  //     if (!active) return;
+  //     setUser(session ? toAuthUser(session.user) : null);
+  //     setStatus(session ? "authenticated" : "unauthenticated");
+  //   });
+  //   return () => { active = false; };
+  // }, [configured]);
 
   useEffect(() => {
-    let active = true;
-    if (!configured) {
-      setStatus("unauthenticated");
-      return () => { active = false; };
-    }
-    void restoreSupabaseSession().then((session) => {
-      if (!active) return;
-      setUser(session ? toAuthUser(session.user) : null);
-      setStatus(session ? "authenticated" : "unauthenticated");
-    });
-    return () => { active = false; };
-  }, [configured]);
+    // [AUTH-BACKEND DISABLED] Always unauthenticated when backend auth is disabled
+    setStatus("unauthenticated");
+  }, []);
 
   const value = useMemo<AuthState>(() => ({
     status,
     user,
     configured,
-    async signInWithPassword(input) {
-      try {
-        const authenticated = await signInWithSupabasePassword(input);
-        setUser(toAuthUser(authenticated));
-        setStatus("authenticated");
-        return { success: true };
-      } catch (error) {
-        setUser(null);
-        setStatus("unauthenticated");
-        return { success: false, message: error instanceof Error ? error.message : "Sign in could not be completed." };
-      }
+    // [AUTH-BACKEND DISABLED] signInWithPassword stub — was calling Supabase token endpoint
+    async signInWithPassword(_input) {
+      // const authenticated = await signInWithSupabasePassword(input);
+      // setUser(toAuthUser(authenticated));
+      // setStatus("authenticated");
+      return { success: false, message: "Authentication backend is currently disabled." };
     },
     signOut() {
-      clearSupabaseSession();
+      // [AUTH-BACKEND DISABLED] clearSupabaseSession() commented out
+      // clearSupabaseSession();
       setUser(null);
       setStatus("unauthenticated");
     },

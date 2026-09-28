@@ -18,7 +18,8 @@
  */
 
 import type { paths } from "../../types/api-schema.d";
-import { getSupabaseAccessToken } from "../../features/auth/api/supabaseAuth";
+// [AUTH-BACKEND DISABLED] Supabase access token import commented out
+// import { getSupabaseAccessToken } from "../../features/auth/api/supabaseAuth";
 import { env } from "../config/env";
 
 export interface RequestOptions {
@@ -151,10 +152,11 @@ export async function makeApiClient(): Promise<ApiClient | null> {
     console.warn("[api/client] VITE_API_BASE_URL is not set -- requests will fail.");
   }
 
-  const token = await getSupabaseAccessToken();
-  if (!token) return null;
-
-  return new ApiClient(baseUrl, token);
+  // [AUTH-BACKEND DISABLED] Supabase token fetch commented out — always returns null (unauthenticated)
+  // const token = await getSupabaseAccessToken();
+  // if (!token) return null;
+  // return new ApiClient(baseUrl, token);
+  return null;
 }
 
 /**
