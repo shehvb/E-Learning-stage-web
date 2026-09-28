@@ -31,8 +31,15 @@ export interface AuthState {
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [status, setStatus] = useState<AuthState["status"]>("unauthenticated");
-  const [user, setUser] = useState<AuthUser | null>(null);
+  // [AUTH-MOCK] Commented out unauthenticated state:
+  // const [status, setStatus] = useState<AuthState["status"]>("unauthenticated");
+  // const [user, setUser] = useState<AuthUser | null>(null);
+  const [status, setStatus] = useState<AuthState["status"]>("authenticated");
+  const [user, setUser] = useState<AuthUser | null>({
+    id: "mock-student-id",
+    name: "Shehab",
+    role: "authenticated",
+  });
 
   // [AUTH-BACKEND DISABLED] Supabase configuration check commented out
   // const configured = isSupabaseAuthConfigured();
@@ -54,8 +61,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   // }, [configured]);
 
   useEffect(() => {
-    // [AUTH-BACKEND DISABLED] Always unauthenticated when backend auth is disabled
-    setStatus("unauthenticated");
+    // [AUTH-MOCK] Commented out forced unauthenticated:
+    // setStatus("unauthenticated");
+    setStatus("authenticated");
   }, []);
 
   const value = useMemo<AuthState>(() => ({

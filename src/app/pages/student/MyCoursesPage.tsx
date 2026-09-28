@@ -28,6 +28,8 @@ import { listStudentCourses, type StudentCourseItem } from "../../../features/st
 export type { StudentCourse };
 
 const STUDENT_COURSE_BRAND = "elite" as const;
+void listStudentCourses;
+void STUDENT_COURSE_BRAND;
 
 function normalizeCategory(title: string) {
   const lower = title.toLowerCase();
@@ -73,6 +75,7 @@ function toDisplayCourse(course: StudentCourseItem): StudentCourse {
     access: course.access,
   };
 }
+void toDisplayCourse;
 function canOpenDisplayCourse(course: StudentCourse) {
   return course.access?.isEnrolled === true;
 }
@@ -149,31 +152,44 @@ export function MyCoursesPage() {
       return;
     }
 
-    const controller = new AbortController();
+    // [AUTH-MOCK] Commented out backend call to listStudentCourses:
+    // const controller = new AbortController();
+    // setIsCoursesLoading(true);
+    // setCoursesError(null);
+    // listStudentCourses({ brand: STUDENT_COURSE_BRAND, page: 1, pageSize: 25, signal: controller.signal })
+    //   .then((payload) => {
+    //     const nextCourses = payload.items.map(toDisplayCourse);
+    //     const nextEnrolledCourses = nextCourses.filter(canOpenDisplayCourse);
+    //     setCourses(nextCourses);
+    //     setSelectedCourseId((current) => {
+    //       if (nextEnrolledCourses.some((course) => course.id === current)) return current;
+    //       return nextEnrolledCourses[0]?.id || "";
+    //     });
+    //   })
+    //   .catch((error: unknown) => {
+    //     if (controller.signal.aborted) return;
+    //     setCourses([]);
+    //     setSelectedCourseId("");
+    //     setCoursesError(error instanceof Error ? error.message : "The learning API request failed.");
+    //   })
+    //   .finally(() => {
+    //     if (!controller.signal.aborted) setIsCoursesLoading(false);
+    //   });
+    // return () => controller.abort();
 
-    setIsCoursesLoading(true);
+    // [AUTH-MOCK] Provide INITIAL_COURSES with enrolled status for previewing Courses section
+    const previewCourses: StudentCourse[] = INITIAL_COURSES.map((c) => ({
+      ...c,
+      access: {
+        isEnrolled: true,
+        canOpen: true,
+        enrollmentStatus: c.status === "completed" ? "completed" : "active",
+      },
+    }));
+    setCourses(previewCourses);
+    setSelectedCourseId(previewCourses[0]?.id || "");
     setCoursesError(null);
-    listStudentCourses({ brand: STUDENT_COURSE_BRAND, page: 1, pageSize: 25, signal: controller.signal })
-      .then((payload) => {
-        const nextCourses = payload.items.map(toDisplayCourse);
-        const nextEnrolledCourses = nextCourses.filter(canOpenDisplayCourse);
-        setCourses(nextCourses);
-        setSelectedCourseId((current) => {
-          if (nextEnrolledCourses.some((course) => course.id === current)) return current;
-          return nextEnrolledCourses[0]?.id || "";
-        });
-      })
-      .catch((error: unknown) => {
-        if (controller.signal.aborted) return;
-        setCourses([]);
-        setSelectedCourseId("");
-        setCoursesError(error instanceof Error ? error.message : "The learning API request failed.");
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setIsCoursesLoading(false);
-      });
-
-    return () => controller.abort();
+    setIsCoursesLoading(false);
   }, [auth.status, retryIndex]);
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

@@ -40,6 +40,9 @@ import "../../../components/learning-space/learningSpace.css";
 import "./CourseOverviewPage.css";
 
 const STUDENT_COURSE_BRAND = "elite" as const;
+void getStudentCourse;
+void listStudentCourseLessons;
+void STUDENT_COURSE_BRAND;
 
 const TABS = [
   { id: "overview", label: "Overview", icon: LayoutGrid },
@@ -235,29 +238,113 @@ export function CourseOverviewPage({ onStartLesson }: CourseOverviewPageProps) {
       return;
     }
 
-    const controller = new AbortController();
-    setIsLoading(true);
-    setError(null);
-    Promise.all([
-      getStudentCourse({ courseId, brand: STUDENT_COURSE_BRAND, signal: controller.signal }),
-      listStudentCourseLessons({ courseId, brand: STUDENT_COURSE_BRAND, signal: controller.signal }),
-    ])
-      .then(([nextCourse, lessonPayload]) => {
-        setCourse(nextCourse);
-        setLessons(lessonPayload.lessons);
-        setExpandedModuleId(nextCourse.chapters[0]?.chapterId ?? null);
-      })
-      .catch((nextError: unknown) => {
-        if (controller.signal.aborted) return;
-        setCourse(null);
-        setLessons([]);
-        setError(nextError instanceof Error ? nextError.message : "The course could not be loaded.");
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setIsLoading(false);
-      });
+    // [AUTH-MOCK] Commented out backend calls to getStudentCourse & listStudentCourseLessons:
+    // const controller = new AbortController();
+    // setIsLoading(true);
+    // setError(null);
+    // Promise.all([
+    //   getStudentCourse({ courseId, brand: STUDENT_COURSE_BRAND, signal: controller.signal }),
+    //   listStudentCourseLessons({ courseId, brand: STUDENT_COURSE_BRAND, signal: controller.signal }),
+    // ])
+    //   .then(([nextCourse, lessonPayload]) => {
+    //     setCourse(nextCourse);
+    //     setLessons(lessonPayload.lessons);
+    //     setExpandedModuleId(nextCourse.chapters[0]?.chapterId ?? null);
+    //   })
+    //   .catch((nextError: unknown) => {
+    //     if (controller.signal.aborted) return;
+    //     setCourse(null);
+    //     setLessons([]);
+    //     setError(nextError instanceof Error ? nextError.message : "The course could not be loaded.");
+    //   })
+    //   .finally(() => {
+    //     if (!controller.signal.aborted) setIsLoading(false);
+    //   });
+    // return () => controller.abort();
 
-    return () => controller.abort();
+    // [AUTH-MOCK] Mock Course detail data for previewing:
+    const mockChapters = [
+      {
+        chapterId: "chapter-1",
+        title: "Introduction to Anatomical Terminology & Planes",
+        sortOrder: 1,
+        status: "published" as const,
+        lessons: [
+          {
+            lessonId: "human-anatomy-i-lesson-1",
+            chapterId: "chapter-1",
+            title: "Introduction to Anatomy & Anatomical Terms",
+            sortOrder: 1,
+            status: "published" as const,
+            mediaStatus: "ready" as const,
+            resourceId: null,
+            playbackAvailable: false as const,
+          },
+          {
+            lessonId: "human-anatomy-i-lesson-2",
+            chapterId: "chapter-1",
+            title: "Anatomical Positions & Directional Terms",
+            sortOrder: 2,
+            status: "published" as const,
+            mediaStatus: "ready" as const,
+            resourceId: null,
+            playbackAvailable: false as const,
+          },
+        ],
+      },
+      {
+        chapterId: "chapter-2",
+        title: "The Skeletal System & Bone Architecture",
+        sortOrder: 2,
+        status: "published" as const,
+        lessons: [
+          {
+            lessonId: "human-anatomy-i-lesson-3",
+            chapterId: "chapter-2",
+            title: "Axial vs Appendicular Skeleton",
+            sortOrder: 1,
+            status: "published" as const,
+            mediaStatus: "ready" as const,
+            resourceId: null,
+            playbackAvailable: false as const,
+          },
+        ],
+      },
+    ];
+
+    const mockDetail: StudentCourseDetail = {
+      courseId,
+      title: "Human Anatomy I: Structure & Organization",
+      code: "ANAT-101",
+      brand: { code: "elite", name: "Elite Medical" },
+      academicInstitution: { code: "MED", name: "Faculty of Medicine" },
+      academicLevel: { levelNumber: 1, title: "Year 1" },
+      academicSemester: { semesterNumber: 1, title: "Semester 1" },
+      cataloguePresentation: "subject_based",
+      unitLabel: "Subject",
+      status: "published",
+      chapterCount: mockChapters.length,
+      lessonCount: mockChapters.reduce((acc, c) => acc + c.lessons.length, 0),
+      mediaSummary: {
+        totalLessons: 3,
+        lessonsWithMedia: 3,
+        pendingMediaLessons: 0,
+      },
+      access: {
+        isEnrolled: true,
+        canOpen: true,
+        enrollmentStatus: "active",
+      },
+      academicUnit: { code: "ANAT", label: "Department of Anatomy" },
+      chapters: mockChapters,
+      updatedAt: new Date().toISOString(),
+    };
+
+    setCourse(mockDetail);
+    setLessons(mockChapters.flatMap((c) => c.lessons));
+    setExpandedModuleId(mockChapters[0].chapterId);
+    setError(null);
+    setIsLoading(false);
   }, [courseId]);
 
   const courseModules = useMemo(() => course ? toCourseModules(course) : [], [course]);

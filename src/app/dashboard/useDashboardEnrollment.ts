@@ -75,7 +75,41 @@ export function useDashboardEnrollment() {
     // Stub: always show empty when authenticated but backend is disabled
     void STUDENT_DASHBOARD_BRAND; // prevent unused warning
     void canOpenCourse; void toEnrollment; // prevent unused warnings
-    setViewModel({ status: "empty", enrolledCourses: [], courses: [] });
+    // [AUTH-MOCK] Commented out empty state to allow previewing authenticated dashboard:
+    // setViewModel({ status: "empty", enrolledCourses: [], courses: [] });
+
+    // [AUTH-MOCK] Mock enrolled courses for previewing DashboardBento:
+    const mockCourse: StudentCourseItem = {
+      courseId: "mock-course-1",
+      title: "Introduction to Clinical Anatomy",
+      code: "MED-101",
+      brand: { code: "elite", name: "Elite Medical" },
+      academicInstitution: { code: "MED", name: "Faculty of Medicine" },
+      academicLevel: { levelNumber: 1, title: "Year 1" },
+      academicSemester: { semesterNumber: 1, title: "Semester 1" },
+      cataloguePresentation: "subject_based",
+      unitLabel: "Subject",
+      status: "published",
+      chapterCount: 4,
+      lessonCount: 16,
+      mediaSummary: {
+        totalLessons: 16,
+        lessonsWithMedia: 14,
+        pendingMediaLessons: 2,
+      },
+      access: {
+        isEnrolled: true,
+        canOpen: true,
+        enrollmentStatus: "active",
+      },
+      updatedAt: new Date().toISOString(),
+    };
+
+    setViewModel({
+      status: "enrolled",
+      enrolledCourses: [{ id: mockCourse.courseId }],
+      courses: [mockCourse],
+    });
   }, [auth, auth.status, retryIndex]);
 
   return { ...viewModel, retry };
