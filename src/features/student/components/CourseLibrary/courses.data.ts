@@ -7,15 +7,15 @@ import {
   Stethoscope,
   type LucideIcon,
 } from "lucide-react";
-import anatomyOverlay from "../../../Assets/dashboard/my-courses-anatomy-overlay.webp";
-import histologyOverlay from "../../../Assets/dashboard/histology-basics.webp";
-import physiologyOverlay from "../../../Assets/dashboard/medical-physiology.webp";
-import biochemistryOverlay from "../../../Assets/dashboard/biochemistry-essentials.webp";
-import embryologyOverlay from "../../../Assets/dashboard/embryology-foundations.webp";
-import anatomyImage from "../../../Assets/course-library/human-anatomy.webp";
-import biochemistryImage from "../../../Assets/course-library/biochemistry-essentials.webp";
-import histologyImage from "../../../Assets/course-library/histology-basics.webp";
-import physiologyImage from "../../../Assets/course-library/medical-physiology.webp";
+import anatomyOverlay from "../../../../Assets/dashboard/my-courses-anatomy-overlay.webp";
+import histologyOverlay from "../../../../Assets/dashboard/histology-basics.webp";
+import physiologyOverlay from "../../../../Assets/dashboard/medical-physiology.webp";
+import biochemistryOverlay from "../../../../Assets/dashboard/biochemistry-essentials.webp";
+import embryologyOverlay from "../../../../Assets/dashboard/embryology-foundations.webp";
+import anatomyImage from "../../../../Assets/course-library/human-anatomy.webp";
+import biochemistryImage from "../../../../Assets/course-library/biochemistry-essentials.webp";
+import histologyImage from "../../../../Assets/course-library/histology-basics.webp";
+import physiologyImage from "../../../../Assets/course-library/medical-physiology.webp";
 
 export interface StudentCourse {
   id: string;
