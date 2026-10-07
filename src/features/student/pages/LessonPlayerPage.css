@@ -908,3 +908,114 @@
     display: flex;
   }
 }
+
+/* =========================================================================
+   CANONICAL RESPONSIVENESS: iPad / Tablet (768px - 1399px)
+   Matches Explore.css and CourseOverviewPage.css pattern:
+   Unconstrained natural scroll container inside .student-dashboard__content,
+   fluid video player aspect-ratio sizing, and natural content flow without clipping.
+   Zero impact on Desktop (>= 1400px).
+   ========================================================================= */
+@media (max-width: 1399px) {
+  .lesson-player-page {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 14px 16px 36px !important;
+    gap: 16px !important;
+  }
+
+  .lesson-player-page .course-overview-heading {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+
+  .lesson-player-page .course-overview-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 18px !important;
+  }
+
+  .lesson-player-page .course-overview-primary {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .lesson-player-page .course-overview-primary.is-tab-expanded {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
+
+  .lesson-player {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: 280px !important;
+    max-height: 600px !important;
+  }
+
+  .lesson-player-page .course-overview-panel--overview {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .lesson-player-page .course-overview-info-row {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 14px !important;
+    height: auto !important;
+  }
+
+  .lesson-player-page .course-overview-info-row > .course-overview-card {
+    height: auto !important;
+    min-height: 140px !important;
+    overflow: visible !important;
+  }
+
+  .lesson-player-page .course-overview-rail {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .lesson-player-page .course-overview-curriculum {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .lesson-player-page .course-overview-curriculum__modules {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .lesson-player-nav {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+

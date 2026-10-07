@@ -2483,6 +2483,8 @@
   color: #fff;
 }
 
+
+
 /* Desktop density and hierarchy pass: this keeps the existing composition,
    while aligning typography and component rhythm to the course workspace. */
 @media (min-width: 980px) {
@@ -2922,3 +2924,127 @@
     gap: 12px;
   }
 }
+
+/* =========================================================================
+   CANONICAL RESPONSIVENESS: iPad / Tablet (768px - 1399px) & Mobile
+   Matches Explore.css and Community.tsx pattern: unconstrained fluid scroll
+   inside .student-dashboard__content, reflowing from two columns to stacked/fluid.
+   Zero impact on Desktop (>= 1400px).
+   ========================================================================= */
+@media (max-width: 1399px) {
+  .course-overview-page {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 14px 16px 36px !important;
+    gap: 16px !important;
+  }
+
+  .course-overview-heading {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+
+  .course-overview-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 18px !important;
+  }
+
+  .course-overview-primary {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .course-overview-primary.is-tab-expanded {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
+
+  .course-overview-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 240px !important;
+    overflow: visible !important;
+  }
+
+  .course-overview-hero__content {
+    grid-column: auto !important;
+    padding: 20px 20px 16px !important;
+    gap: 14px !important;
+  }
+
+  .course-overview-hero__meta {
+    position: static !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    padding: 0 20px 20px !important;
+  }
+
+  .course-overview-panel--overview {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .course-overview-info-row {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 14px !important;
+    height: auto !important;
+  }
+
+  .course-overview-info-row > .course-overview-card {
+    height: auto !important;
+    min-height: 140px !important;
+    overflow: visible !important;
+  }
+
+  .course-overview-rail {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 14px !important;
+  }
+
+  .course-overview-curriculum {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .course-overview-curriculum__modules {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .course-overview-info-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
