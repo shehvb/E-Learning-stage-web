@@ -3,14 +3,11 @@ import { SlidersHorizontal, X, Check, Clock, Target, Zap } from "lucide-react";
 import fireAsset from "../../../../Assets/fire.webp";
 import { useToast } from "../../../../hooks/useToast";
 import { ToastNotification } from "../../../../components/ui/ToastNotification";
+import { ProgressRing } from "../../../../components/ui/ProgressRing";
 import type { WeeklyGoalCardProps } from "./weekly-goal-card.types";
 import "./WeeklyGoalCard.css";
 
 const WEEK_DAYS_INFO = ["S", "M", "T", "W", "T", "F", "S"] as const;
-
-const RING_SIZE = 120;
-const RING_RADIUS = 50;
-const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 const PRESETS = [
   { hours: 6,  label: "6h",  sublabel: "Light" },
@@ -19,14 +16,12 @@ const PRESETS = [
   { hours: 20, label: "20h", sublabel: "Intensive" },
 ];
 
-interface ProgressRingProps {
+interface WeeklyGoalRingProps {
   percentage: number | null;
   isCompletedOrExceeded: boolean;
 }
 
-function ProgressRing({ percentage, isCompletedOrExceeded }: ProgressRingProps) {
-  const progressOffset = RING_CIRCUMFERENCE * (1 - Math.min(percentage ?? 0, 100) / 100);
-
+function WeeklyGoalRing({ percentage, isCompletedOrExceeded }: WeeklyGoalRingProps) {
   return (
     <div
       className={`weekly-goal-ring relative size-39.5 shrink-0 ${
@@ -34,29 +29,13 @@ function ProgressRing({ percentage, isCompletedOrExceeded }: ProgressRingProps) 
       }`}
       aria-hidden="true"
     >
-      <svg
+      <ProgressRing
+        size={120}
+        radius={50}
+        percentage={percentage ?? 0}
+        strokeWidth={8}
         className="size-full rotate-[-82deg]"
-        viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}
-        fill="none"
-      >
-        <circle
-          cx="60"
-          cy="60"
-          r={RING_RADIUS}
-          stroke="var(--color-surface-hover)"
-          strokeWidth="8"
-        />
-        <circle
-          cx="60"
-          cy="60"
-          r={RING_RADIUS}
-          stroke="var(--color-brand)"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={RING_CIRCUMFERENCE}
-          strokeDashoffset={progressOffset}
-        />
-      </svg>
+      />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <span className="text-[30px] font-semibold leading-none text-(--color-text-primary)">
@@ -193,7 +172,7 @@ export function WeeklyGoalCard({
       ) : (
         <>
           <div className="weekly-goal-body flex min-h-0 flex-1 flex-col items-center pt-3">
-            <ProgressRing
+            <WeeklyGoalRing
               percentage={percentage}
               isCompletedOrExceeded={isGoalMet}
             />

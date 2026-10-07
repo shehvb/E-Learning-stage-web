@@ -23,6 +23,7 @@ import {
   INITIAL_REMINDERS,
 } from "./calendar.data";
 import fireAsset from "../../../Assets/fire.webp";
+import { ProgressRing } from "../ProgressRing";
 import type {
   CalendarEvent,
   EventType,
@@ -922,27 +923,15 @@ export function CalendarWorkspace() {
             <div className="calendar-goal-card">
               {/* Donut chart */}
               <div className="calendar-goal-donut">
-                <svg width="76" height="76" viewBox="0 0 76 76" role="img" aria-label={`Study goal ${studyGoal.weeklyPercentage}% completed`}>
-                  <circle
-                    cx="38"
-                    cy="38"
-                    r="30"
-                    fill="none"
-                    stroke="#eef2ef"
-                    strokeWidth="7"
-                  />
-                  <circle
-                    cx="38"
-                    cy="38"
-                    r="30"
-                    fill="none"
-                    stroke="#087f55"
-                    strokeWidth="7"
-                    strokeDasharray={2 * Math.PI * 30}
-                    strokeDashoffset={2 * Math.PI * 30 * (1 - studyGoal.weeklyPercentage / 100)}
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <ProgressRing
+                  size={76}
+                  radius={30}
+                  percentage={studyGoal.weeklyPercentage}
+                  strokeWidth={7}
+                  trackColor="#eef2ef"
+                  progressColor="#087f55"
+                  ariaLabel={`Study goal ${studyGoal.weeklyPercentage}% completed`}
+                />
                 <div className="calendar-goal-donut__text">
                   <span className="calendar-goal-donut__pct">{studyGoal.weeklyPercentage}%</span>
                   <span className="calendar-goal-donut__label">of weekly goal</span>
