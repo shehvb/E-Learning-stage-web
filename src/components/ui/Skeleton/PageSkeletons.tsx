@@ -1,5 +1,6 @@
 import React from "react";
 import { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from "./Skeleton";
+import "../Explore/Explore.css";
 
 /**
  * Universal Card Skeleton container with customizable layout
@@ -433,54 +434,101 @@ export const LessonPlayerSkeleton: React.FC = () => {
  */
 export const ExploreSkeleton: React.FC = () => {
   return (
-    <section className="student-page student-page--explore space-y-4" aria-busy="true" aria-label="Loading explore catalog">
-      {/* Top Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-1">
-        <div className="flex items-center gap-3 flex-1 max-w-xl">
-          <Skeleton width="100%" height={48} borderRadius={16} />
-          <Skeleton width={48} height={48} borderRadius={12} />
-        </div>
-        <Skeleton width={140} height={20} borderRadius={6} />
-      </div>
-
-      {/* Hero + Aside */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <div className="lg:col-span-8">
-          <SkeletonHeroCard height={280} />
-        </div>
-        <div className="lg:col-span-4 flex flex-col gap-3.5">
-          <SkeletonCardWrapper className="flex-1 flex flex-col justify-between">
-            <Skeleton width={130} height={18} borderRadius={4} className="mb-2" />
-            <div className="flex flex-wrap gap-2">
-              <Skeleton width={70} height={24} borderRadius={999} />
-              <Skeleton width={90} height={24} borderRadius={999} />
-              <Skeleton width={80} height={24} borderRadius={999} />
-              <Skeleton width={110} height={24} borderRadius={999} />
+    <section className="student-page student-page--explore" aria-busy="true" aria-label="Loading explore catalog">
+      <div className="explore-workspace">
+        {/* Top Toolbar */}
+        <header className="explore-toolbar">
+          <div className="explore-toolbar__tools">
+            <div className="explore-search-bar">
+              <Skeleton width={16} height={16} borderRadius={4} />
+              <Skeleton width="65%" height={14} borderRadius={4} />
             </div>
-          </SkeletonCardWrapper>
-          <SkeletonCardWrapper className="flex-1 flex flex-col justify-between">
-            <Skeleton width={140} height={18} borderRadius={4} className="mb-2" />
-            <div className="space-y-2">
-              <Skeleton width="100%" height={28} borderRadius={8} />
-              <Skeleton width="100%" height={28} borderRadius={8} />
+            <div className="explore-filter-btn">
+              <Skeleton width={16} height={16} borderRadius={4} />
             </div>
-          </SkeletonCardWrapper>
+            <span className="explore-courses-count">
+              <Skeleton width={120} height={14} borderRadius={4} />
+            </span>
+          </div>
+        </header>
+
+        {/* Hero + Aside Top Section */}
+        <div className="explore-top-section">
+          <div className="explore-top-section__hero-slot">
+            <SkeletonHeroCard height="100%" className="h-full" />
+          </div>
+          <div className="explore-top-section__aside-slot">
+            <div className="explore-aside">
+              {/* Trending Card */}
+              <div className="explore-trending">
+                <div className="explore-trending__header">
+                  <Skeleton width={100} height={15} borderRadius={4} />
+                </div>
+                <div className="flex flex-col justify-between flex-1 mt-1 gap-1">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="flex items-center gap-2 py-0.5">
+                      <Skeleton width={16} height={14} borderRadius={3} />
+                      <Skeleton width={24} height={24} borderRadius={6} />
+                      <div className="space-y-1 flex-1">
+                        <Skeleton width="70%" height={12} borderRadius={3} />
+                        <Skeleton width="45%" height={10} borderRadius={3} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Directions Card */}
+              <div className="explore-directions">
+                <div className="explore-directions__header">
+                  <Skeleton width={110} height={15} borderRadius={4} />
+                </div>
+                <div className="explore-directions__grid">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="explore-direction-card flex flex-col justify-around">
+                      <Skeleton width={18} height={18} borderRadius={4} />
+                      <div className="space-y-1 w-full">
+                        <Skeleton width="80%" height={11} borderRadius={3} />
+                        <Skeleton width="50%" height={9} borderRadius={3} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Category Pills */}
-      <div className="flex gap-2 overflow-x-auto py-1">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} width={100} height={36} borderRadius={999} />
-        ))}
-      </div>
+        {/* Category Pills */}
+        <nav className="explore-categories" aria-hidden="true">
+          <div className="explore-categories__track">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} width={105} height={32} borderRadius={8} />
+            ))}
+          </div>
+        </nav>
 
-      {/* Courses Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
+        {/* Courses Section */}
+        <div className="explore-courses">
+          <header className="explore-courses__header">
+            <div className="explore-courses__heading-wrap">
+              <Skeleton width={180} height={22} borderRadius={6} />
+              <Skeleton width={140} height={15} borderRadius={4} />
+            </div>
+            <div className="explore-courses__controls">
+              <Skeleton width={115} height={34} borderRadius={8} />
+              <Skeleton width={68} height={34} borderRadius={8} />
+            </div>
+          </header>
+          <div className="explore-courses__viewport">
+            <div className="explore-courses__track">
+              <SkeletonCard className="explore-course-card" />
+              <SkeletonCard className="explore-course-card" />
+              <SkeletonCard className="explore-course-card" />
+              <SkeletonCard className="explore-course-card" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
