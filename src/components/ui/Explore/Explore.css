@@ -132,6 +132,7 @@
 }
 
 
+.dynamic-card-row.explore-top-section,
 .explore-top-section {
   display: flex;
   flex-direction: row;
@@ -143,16 +144,20 @@
   width: 100%;
 }
 
+.dynamic-card-slot.explore-top-section__hero-slot,
 .explore-top-section__hero-slot {
   flex: 1.45 1 0%;
   min-width: 0;
   height: 100%;
+  container: none;
 }
 
+.dynamic-card-slot.explore-top-section__aside-slot,
 .explore-top-section__aside-slot {
   flex: 1 1 0%;
   min-width: 330px;
   height: 100%;
+  container: none;
 }
 
 
@@ -1474,15 +1479,55 @@
     overflow: visible;
   }
 
+  .dynamic-card-row.explore-top-section,
   .explore-top-section {
-    grid-template-columns: minmax(0, 1.25fr) minmax(290px, 1fr);
-    gap: 14px;
-    height: auto;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    min-height: clamp(300px, 36vh, 420px) !important;
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+
+  .dynamic-card-slot.explore-top-section__hero-slot,
+  .explore-top-section__hero-slot {
+    flex: 1.45 1 0% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: clamp(300px, 36vh, 420px) !important;
+    container: none !important;
+    overflow: visible !important;
+    display: flex !important;
+  }
+
+  .dynamic-card-slot.explore-top-section__aside-slot,
+  .explore-top-section__aside-slot {
+    flex: 1 1 0% !important;
+    min-width: 290px !important;
+    height: auto !important;
+    min-height: clamp(300px, 36vh, 420px) !important;
+    container: none !important;
+    overflow: visible !important;
+    display: flex !important;
+  }
+
+  .explore-aside {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: clamp(300px, 36vh, 420px) !important;
+    display: grid !important;
+    grid-template-rows: minmax(0, 1.25fr) minmax(0, 0.95fr) !important;
   }
 
   .explore-hero {
-    min-height: clamp(240px, 38vh, 420px);
+    width: 100% !important;
+    height: 100% !important;
+    min-height: clamp(300px, 36vh, 420px) !important;
     padding: clamp(20px, 3vw, 36px);
+    display: flex !important;
   }
 
   .explore-hero__content {
@@ -1721,22 +1766,42 @@
 
 
 @media (max-width: 1023px) {
+  .dynamic-card-row.explore-top-section,
   .explore-top-section {
-    flex-direction: column;
-    height: auto;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 14px !important;
+    overflow: visible !important;
   }
 
+  .dynamic-card-slot.explore-top-section__hero-slot,
   .explore-top-section__hero-slot,
+  .dynamic-card-slot.explore-top-section__aside-slot,
   .explore-top-section__aside-slot {
-    width: 100%;
-    min-width: 0;
-    flex: none;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    container: none !important;
+    overflow: visible !important;
+    display: flex !important;
+  }
+
+  .explore-hero {
+    width: 100% !important;
+    height: auto !important;
+    min-height: clamp(240px, 32vh, 340px) !important;
   }
 
   .explore-aside {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+    gap: 10px !important;
   }
 
   .explore-hero__content {
@@ -2017,9 +2082,19 @@
     overflow: visible;
   }
 
+  .dynamic-card-row.explore-top-section,
   .explore-top-section {
-    height: auto;
-    min-height: 230px;
+    height: auto !important;
+    min-height: 230px !important;
+  }
+
+  .dynamic-card-slot.explore-top-section__hero-slot,
+  .explore-top-section__hero-slot,
+  .dynamic-card-slot.explore-top-section__aside-slot,
+  .explore-top-section__aside-slot {
+    height: auto !important;
+    min-height: 230px !important;
+    container: none !important;
   }
 
   .explore-aside {
