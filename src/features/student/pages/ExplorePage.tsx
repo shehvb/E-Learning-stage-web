@@ -9,6 +9,7 @@ import {
   ExploreTrending,
 } from "../../../components/ui/Explore";
 import "../../../components/ui/Explore/Explore.css";
+import { DynamicCardRow, DynamicCardSlot } from "../../../modules/dynamic-card-grid";
 
 export function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,17 +80,32 @@ export function ExplorePage() {
           </div>
         </header>
 
-        <div className="explore-top-section">
-          <ExploreHero />
-          <div className="explore-aside">
-            <ExploreTrending
-              onSelectTopic={(topic) => setSearchQuery(topic.title)}
-            />
-            <ExploreDirections
-              onSelectDirection={(catId) => setActiveCategory(catId)}
-            />
-          </div>
-        </div>
+        <DynamicCardRow rowId="explore-top-row" className="explore-top-section">
+          <DynamicCardSlot
+            cardId="explore-hero"
+            isVisible={true}
+            flexRatio={1.45}
+            className="explore-top-section__hero-slot"
+          >
+            <ExploreHero />
+          </DynamicCardSlot>
+
+          <DynamicCardSlot
+            cardId="explore-aside"
+            isVisible={true}
+            flexRatio={1}
+            className="explore-top-section__aside-slot"
+          >
+            <div className="explore-aside">
+              <ExploreTrending
+                onSelectTopic={(topic) => setSearchQuery(topic.title)}
+              />
+              <ExploreDirections
+                onSelectDirection={(catId) => setActiveCategory(catId)}
+              />
+            </div>
+          </DynamicCardSlot>
+        </DynamicCardRow>
 
         <ExploreCategories
           activeCategory={activeCategory}

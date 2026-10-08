@@ -133,11 +133,25 @@
 
 
 .explore-top-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(330px, 1fr);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
   gap: clamp(10px, 0.9vw, 16px);
   min-width: 0;
   min-height: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.explore-top-section__hero-slot {
+  flex: 1.45 1 0%;
+  min-width: 0;
+  height: 100%;
+}
+
+.explore-top-section__aside-slot {
+  flex: 1 1 0%;
+  min-width: 330px;
   height: 100%;
 }
 
@@ -944,8 +958,9 @@
 .explore-course-card {
   display: flex;
   flex-direction: column;
-  width: clamp(245px, 21.5vw, 295px);
-  flex: 0 0 clamp(245px, 21.5vw, 295px);
+  flex: 1 1 clamp(245px, 21.5vw, 295px);
+  min-width: 245px;
+  max-width: 100%;
   height: 100%;
   min-height: 0;
   border: 1px solid #dfe9e3;
@@ -1707,7 +1722,15 @@
 
 @media (max-width: 1023px) {
   .explore-top-section {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .explore-top-section__hero-slot,
+  .explore-top-section__aside-slot {
+    width: 100%;
+    min-width: 0;
+    flex: none;
   }
 
   .explore-aside {
