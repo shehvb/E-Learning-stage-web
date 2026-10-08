@@ -3,7 +3,7 @@
  * Public interface definition for src/modules/dynamic-card-grid/
  */
 import type { ReactNode } from "react";
-import type { CardId, ConditionalCardState } from "../data-model";
+import type { CardId, ConditionalCardState } from "../../../src/modules/dynamic-card-grid/types";
 
 export interface DynamicCardSlotProps {
   /** Unique identifier for the card slot */
