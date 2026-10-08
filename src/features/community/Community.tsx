@@ -12,6 +12,7 @@ import { CreateThreadModal } from "./components/CreateThreadModal";
 import { DiscussionDetailModal } from "./components/DiscussionDetailModal";
 import { AllMembersModal } from "./components/AllMembersModal";
 import { useCommunitySocket } from "./hooks/useCommunitySocket";
+import { DynamicCardRow, DynamicCardSlot } from "../../modules/dynamic-card-grid";
 import {
   INITIAL_FEATURED_GROUP,
   INITIAL_TRENDING_TOPICS,
@@ -173,35 +174,55 @@ export function Community() {
         <div className="community-columns-row flex-1 min-h-0 flex flex-col lg:flex-row items-stretch gap-3 sm:gap-3.5 w-full pb-6 lg:pb-0">
           {/* Left Column (Feed, Featured Group, Trending Topics, Mentor Spotlight) */}
           <main className="community-main-feed flex-1 min-w-0 flex flex-col justify-between gap-3 h-full min-h-0 lg:overflow-y-auto xl:overflow-hidden">
-            {/* Row 1: Featured Study Group (7 cols) + Trending Topics (5 cols) */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 sm:gap-3.5 w-full flex-none xl:flex-1 min-h-0 items-stretch">
-              <div className="xl:col-span-7 flex flex-col min-h-0 h-auto xl:h-full">
+            {/* Row 1: Featured Study Group (7 parts) + Trending Topics (5 parts) */}
+            <DynamicCardRow rowId="community-top-row" className="community-top-row">
+              <DynamicCardSlot
+                cardId="community-featured-group"
+                flexRatio={7}
+                minWidth={260}
+                className="community-top-row__slot"
+              >
                 <FeaturedGroupCard
                   group={INITIAL_FEATURED_GROUP}
                   onJoinToggle={handleJoinGroup}
                 />
-              </div>
+              </DynamicCardSlot>
 
-              <div className="xl:col-span-5 flex flex-col min-h-0 h-auto xl:h-full">
+              <DynamicCardSlot
+                cardId="community-trending"
+                flexRatio={5}
+                minWidth={220}
+                className="community-top-row__slot"
+              >
                 <TrendingTopicsWidget
                   topics={INITIAL_TRENDING_TOPICS}
                   onTopicClick={handleTopicClick}
                   onViewAllClick={() => setSelectedDropdownTopic("All topics")}
                 />
-              </div>
-            </div>
+              </DynamicCardSlot>
+            </DynamicCardRow>
 
-            {/* Row 2: Recent Discussions Feed (8 cols) + Mentor Spotlight (4 cols) */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 sm:gap-3.5 w-full flex-none xl:flex-1 min-h-0 items-stretch">
-              <div className="xl:col-span-8 flex flex-col min-h-0 h-90 xl:h-full">
+            {/* Row 2: Recent Discussions Feed (8 parts) + Mentor Spotlight (4 parts) */}
+            <DynamicCardRow rowId="community-bottom-row" className="community-bottom-row">
+              <DynamicCardSlot
+                cardId="community-discussion-feed"
+                flexRatio={8}
+                minWidth={280}
+                className="community-bottom-row__slot"
+              >
                 <DiscussionFeed
                   discussions={filteredDiscussions}
                   onPostClick={handlePostClick}
                   onLikePost={likePost}
                 />
-              </div>
+              </DynamicCardSlot>
 
-              <div className="xl:col-span-4 flex flex-col min-h-0 h-auto xl:h-full">
+              <DynamicCardSlot
+                cardId="community-mentor-spotlight"
+                flexRatio={4}
+                minWidth={200}
+                className="community-bottom-row__slot"
+              >
                 <MentorSpotlightCard
                   mentor={INITIAL_MENTOR}
                   onViewProfile={() =>
@@ -212,8 +233,8 @@ export function Community() {
                     showToast("Opening chat with Mentor Alex Morgan...");
                   }}
                 />
-              </div>
-            </div>
+              </DynamicCardSlot>
+            </DynamicCardRow>
           </main>
 
           {/* Right Sidebar Column (Members Online, Upcoming Events, Top Contributors) - stays fixed, never scrolls */}

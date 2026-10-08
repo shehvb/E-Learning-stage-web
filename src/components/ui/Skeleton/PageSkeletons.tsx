@@ -888,13 +888,28 @@ export const CommunitySkeleton: React.FC = () => {
   return (
     <section className="student-page student-page--community h-full w-full overflow-hidden" aria-busy="true" aria-label="Loading community">
       <div className="w-full max-w-430 h-full mx-auto px-3.5 sm:px-4 lg:px-6 py-2.5 sm:py-3 flex flex-col justify-between gap-3 min-h-0">
-        {/* Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex gap-2 flex-1 max-w-xl">
-            <Skeleton width="100%" height={42} borderRadius={12} />
-            <Skeleton width={100} height={42} borderRadius={12} />
+        {/* ── Toolbar: mirrors SearchAndFilterToolbar exactly ── */}
+        {/* Row 1: Search input + All topics dropdown */}
+        <div className="flex items-center gap-3 w-full">
+          {/* Search input */}
+          <div className="relative flex-1 min-w-0">
+            <Skeleton width="100%" height={44} borderRadius={12} />
           </div>
-          <Skeleton width={130} height={42} borderRadius={12} />
+          {/* Dropdown trigger button */}
+          <Skeleton width={140} height={44} borderRadius={12} />
+        </div>
+
+        {/* Row 2: Category pill filters + quick-add "+" button */}
+        <div className="flex items-center gap-2 overflow-x-hidden">
+          {/* 6 category pills: All, Study Groups, Discussions, Q&A, Resources, Events */}
+          <Skeleton width={46} height={34} borderRadius={8} />
+          <Skeleton width={112} height={34} borderRadius={8} />
+          <Skeleton width={106} height={34} borderRadius={8} />
+          <Skeleton width={54} height={34} borderRadius={8} />
+          <Skeleton width={96} height={34} borderRadius={8} />
+          <Skeleton width={72} height={34} borderRadius={8} />
+          {/* Plus button */}
+          <Skeleton width={34} height={34} borderRadius={8} />
         </div>
 
         {/* 2-Column row */}
