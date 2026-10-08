@@ -20,6 +20,7 @@ import type {
   AssignmentStatus,
   AssignmentUrgency,
 } from "./assignments.types";
+import { DynamicCardRow, DynamicCardSlot } from "../../../modules/dynamic-card-grid";
 import "./Assignments.css";
 
 const PAGE_SIZE = 6;
@@ -342,17 +343,24 @@ export function AssignmentsWorkspace() {
           </div>
         </div>
 
-        <div className="assignments-grid" aria-label="Assignment list">
+        <DynamicCardRow rowId="assignments-cards-row" className="assignments-grid" aria-label="Assignment list">
           {visibleItems.map((item) => (
-            <AssignmentCard
+            <DynamicCardSlot
               key={item.id}
-              item={item}
-              bookmarked={Boolean(bookmarked[item.id])}
-              onToggleBookmark={() => toggleBookmark(item.id)}
-              onOpenDetail={() => handleOpenDetail(item)}
-            />
+              cardId={item.id}
+              isVisible={true}
+              flexRatio={1}
+              className="assignments-grid__slot"
+            >
+              <AssignmentCard
+                item={item}
+                bookmarked={Boolean(bookmarked[item.id])}
+                onToggleBookmark={() => toggleBookmark(item.id)}
+                onOpenDetail={() => handleOpenDetail(item)}
+              />
+            </DynamicCardSlot>
           ))}
-        </div>
+        </DynamicCardRow>
         <footer className="assignments-footer">
           <span>
             Showing {showingFrom}–{showingTo} of {totalForFilter} assignments

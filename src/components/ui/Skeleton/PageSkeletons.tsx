@@ -654,51 +654,53 @@ export const AssignmentsSkeleton: React.FC = () => {
           {/* 2-Column 3-Row Assignments Grid (6 Cards) */}
           <div className="assignments-grid">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="assignment-card">
-                {/* Left side of card */}
-                <div className="assignment-card__left">
-                  {/* Category tag */}
-                  <Skeleton width={84} height={12} borderRadius={2} />
+              <div key={i} className="assignments-grid__slot">
+                <div className="assignment-card">
+                  {/* Left side of card */}
+                  <div className="assignment-card__left">
+                    {/* Category tag */}
+                    <Skeleton width={84} height={12} borderRadius={2} />
 
-                  <div className="assignment-card__body">
-                    {/* Organ Art Placeholder (130x130) */}
-                    <div className="assignment-card__art shrink-0">
-                      <Skeleton width={100} height={100} borderRadius={16} />
-                    </div>
-
-                    {/* Card Info */}
-                    <div className="assignment-card__info flex-1">
-                      <div className="space-y-1.5">
-                        <Skeleton width="90%" height={20} borderRadius={4} />
-                        <Skeleton width="100%" height={14} borderRadius={4} />
-                        <Skeleton width="75%" height={14} borderRadius={4} />
+                    <div className="assignment-card__body">
+                      {/* Organ Art Placeholder (130x130) */}
+                      <div className="assignment-card__art shrink-0">
+                        <Skeleton width="100%" height="100%" borderRadius={12} />
                       </div>
 
-                      {/* Due date and relative tag */}
-                      <div className="assignment-card__meta">
-                        <Skeleton width={110} height={14} borderRadius={4} />
-                        <Skeleton width={64} height={19} borderRadius={999} />
+                      {/* Card Info */}
+                      <div className="assignment-card__info flex-1">
+                        <div className="space-y-1.5">
+                          <Skeleton width="90%" height={20} borderRadius={4} />
+                          <Skeleton width="100%" height={14} borderRadius={4} />
+                          <Skeleton width="75%" height={14} borderRadius={4} />
+                        </div>
+
+                        {/* Due date and relative tag */}
+                        <div className="assignment-card__meta">
+                          <Skeleton width={110} height={14} borderRadius={4} />
+                          <Skeleton width={64} height={19} borderRadius={999} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Right side of card */}
-                <div className="assignment-card__right">
-                  <div className="assignment-card__header">
-                    <Skeleton width={74} height={26} borderRadius={999} />
-                    <Skeleton width={26} height={26} borderRadius={6} />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Skeleton width={60} height={12} borderRadius={4} />
-                    <div className="flex items-center gap-1.5">
-                      <Skeleton width="100%" height={8} borderRadius={999} />
-                      <Skeleton width={26} height={12} borderRadius={4} />
+                  {/* Right side of card */}
+                  <div className="assignment-card__right">
+                    <div className="assignment-card__header">
+                      <Skeleton width={74} height={26} borderRadius={999} />
+                      <Skeleton width={26} height={26} borderRadius={6} />
                     </div>
-                  </div>
 
-                  <Skeleton width="100%" height={28} borderRadius={8} />
+                    <div className="space-y-1.5">
+                      <Skeleton width={60} height={12} borderRadius={4} />
+                      <div className="flex items-center gap-1.5">
+                        <Skeleton width="100%" height={8} borderRadius={999} />
+                        <Skeleton width={26} height={12} borderRadius={4} />
+                      </div>
+                    </div>
+
+                    <Skeleton width="100%" height={28} borderRadius={8} />
+                  </div>
                 </div>
               </div>
             ))}
