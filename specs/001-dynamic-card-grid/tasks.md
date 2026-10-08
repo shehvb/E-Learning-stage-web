@@ -15,8 +15,8 @@
 
 **Purpose**: Module initialization and directory scaffolding
 
-- [ ] T001 Create module directory structure at src/modules/dynamic-card-grid/components, hooks, and types
-- [ ] T002 [P] Create initial CSS module stylesheet with layout resets in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
+- [x] T001 Create module directory structure at src/modules/dynamic-card-grid/components, hooks, and types
+- [x] T002 [P] Create initial CSS module stylesheet with layout resets in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
 
 ---
 
@@ -26,9 +26,9 @@
 
 **⚠️ CRITICAL**: Foundational tasks must be complete before user story integrations begin
 
-- [ ] T003 [P] Implement core TypeScript interfaces (CardId, CardConditionRule, ConditionalCardState, DynamicCardSlotProps, DynamicCardRowProps) in src/modules/dynamic-card-grid/types/index.ts
-- [ ] T004 Implement state hook with condition evaluation and visibility mapping in src/modules/dynamic-card-grid/hooks/useConditionalCardState.ts
-- [ ] T005 [P] Create public barrel export file exporting all public primitives and types in src/modules/dynamic-card-grid/index.ts
+- [x] T003 [P] Implement core TypeScript interfaces (CardId, CardConditionRule, ConditionalCardState, DynamicCardSlotProps, DynamicCardRowProps) in src/modules/dynamic-card-grid/types/index.ts
+- [x] T004 Implement state hook with condition evaluation and visibility mapping in src/modules/dynamic-card-grid/hooks/useConditionalCardState.ts
+- [x] T005 [P] Create public barrel export file exporting all public primitives and types in src/modules/dynamic-card-grid/index.ts
 
 **Checkpoint**: Foundation ready — types and state hook verified by compiler.
 
@@ -42,11 +42,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T006 [P] [US1] Implement fluid flex row container component in src/modules/dynamic-card-grid/components/DynamicCardRow.tsx
-- [ ] T007 [P] [US1] Implement dynamic card slot container with conditional DOM rendering and flexRatio growth in src/modules/dynamic-card-grid/components/DynamicCardSlot.tsx
-- [ ] T008 [US1] Add CSS layout rules with min-width: 0 and gap clamping in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
-- [ ] T009 [US1] Integrate DynamicCardRow and DynamicCardSlot into student dashboard top row in src/features/student/components/DashboardBento/DashboardBento.tsx
-- [ ] T010 [US1] Update top row CSS in src/features/student/components/DashboardBento/DashboardBento.css to consume dynamic flex layout
+- [x] T006 [P] [US1] Implement fluid flex row container component in src/modules/dynamic-card-grid/components/DynamicCardRow.tsx
+- [x] T007 [P] [US1] Implement dynamic card slot container with conditional DOM rendering and flexRatio growth in src/modules/dynamic-card-grid/components/DynamicCardSlot.tsx
+- [x] T008 [US1] Add CSS layout rules with min-width: 0 and gap clamping in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
+- [x] T009 [US1] Integrate DynamicCardRow and DynamicCardSlot into student dashboard top row in src/features/student/components/DashboardBento/DashboardBento.tsx
+- [x] T010 [US1] Update top row CSS in src/features/student/components/DashboardBento/DashboardBento.css to consume dynamic flex layout
 
 **Checkpoint**: User Story 1 fully functional. Dashboard top row dynamically expands with zero orphaned gaps.
 
@@ -60,10 +60,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T011 [US2] Enhance DynamicCardSlot with AnimatePresence and motion.div layout animations in src/modules/dynamic-card-grid/components/DynamicCardSlot.tsx
-- [ ] T012 [US2] Connect session and streak milestone unlock triggers in src/features/student/components/DashboardBento/DashboardBento.tsx
-- [ ] T013 [US2] Apply DynamicCardRow and DynamicCardSlot to middle row cards (MyProgress, Upcoming, YourStreak) in src/features/student/components/DashboardBento/DashboardBento.tsx
-- [ ] T014 [US2] Update middle row CSS to fluid flex redistribution in src/features/student/components/DashboardBento/DashboardBento.css
+- [x] T011 [US2] Enhance DynamicCardSlot with AnimatePresence and motion.div layout animations in src/modules/dynamic-card-grid/components/DynamicCardSlot.tsx
+- [x] T012 [US2] Connect session and streak milestone unlock triggers in src/features/student/components/DashboardBento/DashboardBento.tsx
+- [x] T013 [US2] Apply DynamicCardRow and DynamicCardSlot to middle row cards (MyProgress, Upcoming, YourStreak) in src/features/student/components/DashboardBento/DashboardBento.tsx
+- [x] T014 [US2] Update middle row CSS to fluid flex redistribution in src/features/student/components/DashboardBento/DashboardBento.css
 
 **Checkpoint**: User Stories 1 & 2 operational. Live unlocking transitions smoothly between states.
 
@@ -77,9 +77,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T015 [US3] Configure CSS container query hooks (`@container bento-slot`) on DynamicCardSlot in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
-- [ ] T016 [US3] Implement responsive breakpoint rules (1199px, 1024px, 820px, 768px) for mobile stacked flow in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
-- [ ] T017 [US3] Verify and adjust DashboardBento height clamps to prevent desktop overflow in src/features/student/components/DashboardBento/DashboardBento.css
+- [x] T015 [US3] Configure CSS container query hooks (`@container bento-slot`) on DynamicCardSlot in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
+- [x] T016 [US3] Implement responsive breakpoint rules (1199px, 1024px, 820px, 768px) for mobile stacked flow in src/modules/dynamic-card-grid/components/DynamicCardGrid.css
+- [x] T017 [US3] Verify and adjust DashboardBento height clamps to prevent desktop overflow in src/features/student/components/DashboardBento/DashboardBento.css
 
 **Checkpoint**: All three user stories fully functional and verified across all viewport presets.
 
@@ -89,9 +89,9 @@
 
 **Purpose**: Validation, type checking, build pass, and project documentation updates
 
-- [ ] T018 Run TypeScript verification compiler gate via npx tsc --noEmit
-- [ ] T019 Run Vite production bundle build verification gate via npm run build
-- [ ] T020 [P] Update component architecture documentation in docs/components/DashboardBento.md
+- [x] T018 Run TypeScript verification compiler gate via npx tsc --noEmit
+- [x] T019 Run Vite production bundle build verification gate via npm run build
+- [x] T020 [P] Update component architecture documentation in docs/components/DashboardBento.md
 
 ---
 

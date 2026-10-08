@@ -8,6 +8,7 @@ import { RecommendedCourses } from "../../../../components/ui/RecommendedCourses
 import { Upcoming } from "../../../../components/ui/Upcoming";
 import { WeeklyGoalCard } from "../WeeklyGoalCard";
 import { YourStreak } from "../YourStreak";
+import { DynamicCardRow, DynamicCardSlot, useConditionalCardState } from "../../../../modules/dynamic-card-grid";
 import type { UpcomingItem } from "../../../../components/ui/Upcoming/upcoming.types";
 import type { StudentCourseItem } from "../../api/studentCoursesApi";
 import "./DashboardBento.css";
@@ -20,6 +21,8 @@ export interface DashboardBentoProps {
    * placeholder instead of empty/broken states.
    */
   hasSession?: boolean;
+  streakDays?: number;
+  isAIGuideVisible?: boolean;
 }
 
 function canOpenCourse(course: StudentCourseItem) {
@@ -54,45 +57,92 @@ function NoSessionProgressCard() {
   );
 }
 
-export function DashboardBento({ courses = [], hasSession = false }: DashboardBentoProps) {
+export function DashboardBento({
+  courses = [],
+  hasSession = false,
+  streakDays = 0,
+  isAIGuideVisible = true,
+}: DashboardBentoProps) {
   const [isAIOpen, setIsAIOpen] = useState(false);
   const availableSubjectItems = useMemo(() => buildAvailableSubjectItems(courses), [courses]);
+
+  const { isCardActive } = useConditionalCardState({
+    hasSession,
+    streakDays,
+    isAIGuideEnabled: isAIGuideVisible,
+  });
 
   return (
     <section className="dashboard-bento" aria-label="Learning dashboard">
       <h1 className="sr-only">Student Home Dashboard</h1>
-      <div className="dashboard-bento__row dashboard-bento__row--top">
-        <div className="dashboard-bento__slot dashboard-bento__slot--continue">
+      
+      {/* Top Row: ContinueLearning + AILearningGuide + WeeklyGoalCard with fluid auto-expansion */}
+      <DynamicCardRow rowId="top-row" className="dashboard-bento__row dashboard-bento__row--top">
+        <DynamicCardSlot
+          cardId="continue-learning"
+          isVisible={isCardActive("continue-learning")}
+          flexRatio={1.25}
+          className="dashboard-bento__slot dashboard-bento__slot--continue"
+        >
           <ContinueLearning courses={courses} />
-        </div>
-        <div className="dashboard-bento__slot dashboard-bento__slot--ai">
+        </DynamicCardSlot>
+
+        <DynamicCardSlot
+          cardId="ai-learning-guide"
+          isVisible={isCardActive("ai-learning-guide")}
+          flexRatio={1.55}
+          className="dashboard-bento__slot dashboard-bento__slot--ai"
+        >
           <AILearningGuide />
-        </div>
-        <div className="dashboard-bento__slot dashboard-bento__slot--weekly">
+        </DynamicCardSlot>
+
+        <DynamicCardSlot
+          cardId="weekly-goal"
+          isVisible={isCardActive("weekly-goal")}
+          flexRatio={1}
+          className="dashboard-bento__slot dashboard-bento__slot--weekly"
+        >
           {/* goalSet=false triggers the "Set your goal" first-time state */}
           <WeeklyGoalCard goalSet={false} />
-        </div>
-      </div>
+        </DynamicCardSlot>
+      </DynamicCardRow>
 
-      <div className="dashboard-bento__row dashboard-bento__row--middle">
-        <div className="dashboard-bento__slot dashboard-bento__slot--progress">
-          {hasSession
-            ? <MyProgress />
-            : <NoSessionProgressCard />}
-        </div>
-        <div className="dashboard-bento__slot dashboard-bento__slot--upcoming">
+      {/* Middle Row: MyProgress + Upcoming + YourStreak with fluid auto-expansion */}
+      <DynamicCardRow rowId="middle-row" className="dashboard-bento__row dashboard-bento__row--middle">
+        <DynamicCardSlot
+          cardId="my-progress"
+          isVisible={true}
+          flexRatio={1.1}
+          className="dashboard-bento__slot dashboard-bento__slot--progress"
+        >
+          {hasSession ? <MyProgress /> : <NoSessionProgressCard />}
+        </DynamicCardSlot>
+
+        <DynamicCardSlot
+          cardId="upcoming-schedule"
+          isVisible={isCardActive("upcoming-schedule")}
+          flexRatio={1}
+          className="dashboard-bento__slot dashboard-bento__slot--upcoming"
+        >
           <Upcoming
             title="Available subjects"
             count={availableSubjectItems.length}
             items={availableSubjectItems}
           />
-        </div>
-        <div className="dashboard-bento__slot dashboard-bento__slot--streak">
-          {/* streakDays=0 until backend data is available */}
-          <YourStreak streakDays={0} totalMilestones={5} completedMilestones={0} />
-        </div>
-      </div>
+        </DynamicCardSlot>
 
+        <DynamicCardSlot
+          cardId="your-streak"
+          isVisible={isCardActive("your-streak")}
+          flexRatio={1.58}
+          className="dashboard-bento__slot dashboard-bento__slot--streak"
+        >
+          {/* streakDays from props */}
+          <YourStreak streakDays={streakDays} totalMilestones={5} completedMilestones={0} />
+        </DynamicCardSlot>
+      </DynamicCardRow>
+
+      {/* Bottom Row: Full width RecommendedCourses */}
       <div className="dashboard-bento__row dashboard-bento__row--bottom">
         <div className="dashboard-bento__slot dashboard-bento__slot--recommended">
           <RecommendedCourses courses={courses} />

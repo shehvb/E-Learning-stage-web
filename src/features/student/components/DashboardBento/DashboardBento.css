@@ -19,15 +19,15 @@
 }
 
 .dashboard-bento__row--top {
-  grid-template-columns:
-    minmax(0, 1.25fr) minmax(0, 1.55fr) minmax(0, 1fr);
-  grid-template-areas: "continue ai goal";
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .dashboard-bento__row--middle {
-  grid-template-columns:
-    minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.58fr);
-  grid-template-areas: "progress upcoming streak";
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .dashboard-bento__row--bottom {
