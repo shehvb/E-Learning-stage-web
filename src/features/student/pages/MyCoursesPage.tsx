@@ -210,6 +210,10 @@ export function MyCoursesPage() {
     title: "Title: A–Z",
   }[sortBy];
 
+  if (isCoursesLoading) {
+    return <MyCoursesSkeleton />;
+  }
+
   return (
     <section className="student-page student-page--courses" aria-labelledby="my-courses-title">
       <div className="my-courses-workspace">
@@ -319,9 +323,7 @@ export function MyCoursesPage() {
           </div>
         </header>
 
-        {isCoursesLoading ? (
-          <MyCoursesSkeleton />
-        ) : auth.status !== "authenticated" ? (
+        {auth.status !== "authenticated" ? (
           <div className="dashboard-feedback" role="status">
             <strong>Sign in to view your Elite subjects.</strong>
             <button type="button" onClick={() => navigate("/auth/sign-in", { state: { from: "/" } })}>Sign in</button>

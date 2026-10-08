@@ -159,8 +159,30 @@ export const HomeDashboardSkeleton: React.FC = () => {
  */
 export const MyCoursesSkeleton: React.FC = () => {
   return (
-    <section className="student-page student-page--my-courses space-y-5" aria-busy="true" aria-label="Loading your courses">
-      <div className="my-courses-overview">
+    <section className="student-page student-page--courses" aria-busy="true" aria-label="Loading your courses">
+      <div className="my-courses-workspace space-y-5">
+        {/* Top Header with Search Bar, Status Tabs, and Sort */}
+        <header className="my-courses-heading">
+          <div className="my-courses-heading__controls">
+            {/* Search Bar on the left */}
+            <div className="my-courses-heading__search">
+              <Skeleton width="100%" height={53} borderRadius={13} />
+            </div>
+
+            {/* Course Status Tabs */}
+            <div className="course-status-tabs flex items-center gap-1 p-1">
+              <Skeleton width={115} height={36} borderRadius={8} />
+              <Skeleton width={115} height={36} borderRadius={8} />
+              <Skeleton width={90} height={36} borderRadius={8} />
+            </div>
+
+            {/* Sort Dropdown Button */}
+            <Skeleton width={130} height={44} borderRadius={11} />
+          </div>
+        </header>
+
+        {/* Overview Row */}
+        <div className="my-courses-overview">
         {/* Hero Focus Card */}
         <div className="my-courses-overview__hero-slot">
           <SkeletonHeroCard height={290} />
@@ -194,12 +216,19 @@ export const MyCoursesSkeleton: React.FC = () => {
       </div>
 
       {/* Grid of courses */}
-      <div className="pt-2">
-        <div className="flex justify-between items-center mb-4">
-          <Skeleton width={180} height={22} borderRadius={6} />
-          <div className="flex gap-2">
-            <Skeleton width={100} height={32} borderRadius={8} />
-            <Skeleton width={120} height={32} borderRadius={8} />
+      <div className="course-library pt-2">
+        <div className="course-library__header flex justify-between items-center mb-4">
+          <div className="flex items-center gap-3">
+            <Skeleton width={180} height={22} borderRadius={6} />
+            <Skeleton width={70} height={22} borderRadius={999} />
+          </div>
+          <div className="course-library__toolbar flex items-center gap-3">
+            <div className="course-library-categories__track hidden xl:flex gap-1 p-1">
+              <Skeleton width={75} height={32} borderRadius={8} />
+              <Skeleton width={75} height={32} borderRadius={8} />
+              <Skeleton width={75} height={32} borderRadius={8} />
+            </div>
+            <Skeleton width={240} height={44} borderRadius={12} />
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -209,8 +238,9 @@ export const MyCoursesSkeleton: React.FC = () => {
           <SkeletonCard />
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 };
 
 /**
