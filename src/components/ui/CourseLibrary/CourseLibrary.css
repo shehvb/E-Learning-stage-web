@@ -229,9 +229,9 @@
 .course-library__card {
   display: flex;
   flex-direction: column;
-  width: calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
+  flex: 1 1 calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
   min-width: calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
-  flex: 0 0 calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
+  max-width: 100%;
   height: clamp(265px, 29vh, 290px);
   overflow: hidden;
   border: 1px solid #dfe9e4;
@@ -780,9 +780,9 @@
   }
 
   .course-library__card {
-    width: calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
+    flex: 1 1 calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
     min-width: calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
-    flex-basis: calc((100% - clamp(54px, 4.05vw, 72px)) / 4);
+    max-width: 100%;
     height: clamp(285px, 31vh, 310px);
   }
 

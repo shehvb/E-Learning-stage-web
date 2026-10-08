@@ -1065,9 +1065,25 @@ main[data-main-workspace] {
 }
 
 .my-courses-overview {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(220px, .85fr);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
   gap: clamp(12px, 1vw, 16px);
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+}
+
+.my-courses-overview__hero-slot {
+  flex: 1.55 1 0%;
+  min-width: 0;
+  height: 100%;
+}
+
+.my-courses-overview__summaries-slot {
+  flex: 0.85 1 0%;
+  min-width: 240px;
+  height: 100%;
 }
 
 .my-courses-overview__feature {
@@ -1086,6 +1102,19 @@ main[data-main-workspace] {
   display: grid;
   grid-template-rows: minmax(0, 1.3fr) minmax(0, .75fr);
   gap: clamp(12px, 1vw, 16px);
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .my-courses-overview {
+    flex-direction: column;
+    height: auto;
+  }
+  .my-courses-overview__hero-slot,
+  .my-courses-overview__summaries-slot {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .student-page__rail {

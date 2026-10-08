@@ -50,30 +50,37 @@
 
 .dashboard-bento__slot--continue {
   grid-area: continue;
+  flex: 1.25 1 0%;
 }
 
 .dashboard-bento__slot--ai {
   grid-area: ai;
+  flex: 1.55 1 0%;
 }
 
 .dashboard-bento__slot--weekly {
   grid-area: goal;
+  flex: 1 1 0%;
 }
 
 .dashboard-bento__slot--progress {
   grid-area: progress;
+  flex: 1.1 1 0%;
 }
 
 .dashboard-bento__slot--upcoming {
   grid-area: upcoming;
+  flex: 1 1 0%;
 }
 
 .dashboard-bento__slot--streak {
   grid-area: streak;
+  flex: 1.58 1 0%;
 }
 
 .dashboard-bento__slot--recommended {
   grid-area: recommended;
+  flex: 1 1 100%;
 }
 
 .dashboard-bento__placeholder {

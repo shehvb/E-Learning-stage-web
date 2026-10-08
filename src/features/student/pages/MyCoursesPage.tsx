@@ -24,6 +24,7 @@ import heroBackground from "../../../Assets/dashboard/my-courses-hero-background
 import { MyCoursesSkeleton } from "../../../components/ui/Skeleton";
 import { INITIAL_COURSES, type StudentCourse } from "../../../components/ui/CourseLibrary/courses.data";
 import { listStudentCourses, type StudentCourseItem } from "../api/studentCoursesApi";
+import { DynamicCardRow, DynamicCardSlot } from "../../../modules/dynamic-card-grid";
 
 export type { StudentCourse };
 
@@ -333,12 +334,18 @@ export function MyCoursesPage() {
         ) : !activeFocusCourse ? (
           <div className="dashboard-feedback" role="status">No enrolled subjects are available for this student yet.</div>
         ) : (
-        <div className="my-courses-overview">
-          <article
-            className="course-focus-card"
-            aria-label={`Continue ${activeFocusCourse.title}`}
-            style={{ backgroundImage: `url(${heroBackground})` }}
+        <DynamicCardRow rowId="courses-overview-row" className="my-courses-overview">
+          <DynamicCardSlot
+            cardId="course-focus-hero"
+            isVisible={Boolean(activeFocusCourse)}
+            flexRatio={1.55}
+            className="my-courses-overview__hero-slot"
           >
+            <article
+              className="course-focus-card"
+              aria-label={`Continue ${activeFocusCourse.title}`}
+              style={{ backgroundImage: `url(${heroBackground})` }}
+            >
             <div className="course-focus-card__art" aria-hidden="true">
               <img src={activeFocusCourse.heroOverlay} alt="" />
               <svg viewBox="0 0 520 320" preserveAspectRatio="xMidYMid meet">
@@ -416,92 +423,100 @@ export function MyCoursesPage() {
                 </button>
               </div>
             </footer>
-          </article>
-
-          <div className="my-courses-overview__summaries">
-            <article className="course-summary course-summary--week">
-              <header>
-                <h2>This week</h2>
-                <CalendarDays aria-hidden="true" />
-              </header>
-              <div className="week-days" role="status">
-                <p>A study schedule is not available yet.</p>
-              </div>
-              <footer>
-                <Clock3 aria-hidden="true" />
-                <b>Schedule unavailable</b>
-                <span>Study activity has not been provided.</span>
-              </footer>
             </article>
+          </DynamicCardSlot>
 
-            <article className="course-summary course-summary--pace">
-              <header className="flex justify-between items-start">
-                <div>
-                  <h2>Your pace</h2>
-                  <strong>—</strong>
-                  <small>Progress unavailable</small>
+          <DynamicCardSlot
+            cardId="course-summaries"
+            isVisible={true}
+            flexRatio={0.85}
+            className="my-courses-overview__summaries-slot"
+          >
+            <div className="my-courses-overview__summaries">
+              <article className="course-summary course-summary--week">
+                <header>
+                  <h2>This week</h2>
+                  <CalendarDays aria-hidden="true" />
+                </header>
+                <div className="week-days" role="status">
+                  <p>A study schedule is not available yet.</p>
                 </div>
-                <div className="pace-header-actions">
-                  <div className="pace-switch" role="group" aria-label="Pace timeframe selector">
-                    <button
-                      type="button"
-                      className={`pace-switch__btn ${!isPaceMonthly ? "is-active" : ""}`}
-                      onClick={() => setIsPaceMonthly(false)}
-                      aria-pressed={!isPaceMonthly}
-                    >
-                      Weekly
-                    </button>
-                    <button
-                      type="button"
-                      className={`pace-switch__btn ${isPaceMonthly ? "is-active" : ""}`}
-                      onClick={() => setIsPaceMonthly(true)}
-                      aria-pressed={isPaceMonthly}
-                    >
-                      Monthly
-                    </button>
+                <footer>
+                  <Clock3 aria-hidden="true" />
+                  <b>Schedule unavailable</b>
+                  <span>Study activity has not been provided.</span>
+                </footer>
+              </article>
+
+              <article className="course-summary course-summary--pace">
+                <header className="flex justify-between items-start">
+                  <div>
+                    <h2>Your pace</h2>
+                    <strong>—</strong>
+                    <small>Progress unavailable</small>
                   </div>
-                  <TrendingUp aria-hidden="true" />
+                  <div className="pace-header-actions">
+                    <div className="pace-switch" role="group" aria-label="Pace timeframe selector">
+                      <button
+                        type="button"
+                        className={`pace-switch__btn ${!isPaceMonthly ? "is-active" : ""}`}
+                        onClick={() => setIsPaceMonthly(false)}
+                        aria-pressed={!isPaceMonthly}
+                      >
+                        Weekly
+                      </button>
+                      <button
+                        type="button"
+                        className={`pace-switch__btn ${isPaceMonthly ? "is-active" : ""}`}
+                        onClick={() => setIsPaceMonthly(true)}
+                        aria-pressed={isPaceMonthly}
+                      >
+                        Monthly
+                      </button>
+                    </div>
+                    <TrendingUp aria-hidden="true" />
+                  </div>
+                </header>
+                <div className="pace-chart-container" role="status" aria-label="No progress data available">
+                  <p>Progress data will appear after lesson completion activity is provided.</p>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={pacePoints}
+                      margin={{ top: 8, right: 4, bottom: 0, left: 4 }}
+                    >
+                      <defs>
+                        <linearGradient id="paceFillGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#24ad68" stopOpacity={0.25} />
+                          <stop offset="100%" stopColor="#24ad68" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <YAxis domain={[0, 100]} hide width={0} />
+                      <Tooltip content={<PaceCustomTooltip />} cursor={false} />
+                      <Area
+                        type="monotone"
+                        dataKey="value"
+                        stroke="#24ad68"
+                        strokeWidth={2.5}
+                        fill="url(#paceFillGradient)"
+                        dot={false}
+                        activeDot={{
+                          r: 5,
+                          fill: "#24ad68",
+                          stroke: "#fff",
+                          strokeWidth: 2,
+                        }}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
-              </header>
-              <div className="pace-chart-container" role="status" aria-label="No progress data available">
-                <p>Progress data will appear after lesson completion activity is provided.</p>
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart
-                    data={pacePoints}
-                    margin={{ top: 8, right: 4, bottom: 0, left: 4 }}
-                  >
-                    <defs>
-                      <linearGradient id="paceFillGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#24ad68" stopOpacity={0.25} />
-                        <stop offset="100%" stopColor="#24ad68" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <YAxis domain={[0, 100]} hide width={0} />
-                    <Tooltip content={<PaceCustomTooltip />} cursor={false} />
-                    <Area
-                      type="monotone"
-                      dataKey="value"
-                      stroke="#24ad68"
-                      strokeWidth={2.5}
-                      fill="url(#paceFillGradient)"
-                      dot={false}
-                      activeDot={{
-                        r: 5,
-                        fill: "#24ad68",
-                        stroke: "#fff",
-                        strokeWidth: 2,
-                      }}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-              <p>
-                <Sparkles aria-hidden="true" />
-                Progress will appear when lesson completion data is available
-              </p>
-            </article>
-          </div>
-        </div>
+                <p>
+                  <Sparkles aria-hidden="true" />
+                  Progress will appear when lesson completion data is available
+                </p>
+              </article>
+            </div>
+          </DynamicCardSlot>
+        </DynamicCardRow>
         )}
 
         {!isCoursesLoading && !coursesError && recommendedCourses.length > 0 ? (

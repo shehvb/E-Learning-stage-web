@@ -160,34 +160,36 @@ export const HomeDashboardSkeleton: React.FC = () => {
 export const MyCoursesSkeleton: React.FC = () => {
   return (
     <section className="student-page student-page--my-courses space-y-5" aria-busy="true" aria-label="Loading your courses">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Hero Focus Card (8 cols) */}
-        <div className="lg:col-span-8">
+      <div className="my-courses-overview">
+        {/* Hero Focus Card */}
+        <div className="my-courses-overview__hero-slot">
           <SkeletonHeroCard height={290} />
         </div>
-        {/* Right Summaries (4 cols) */}
-        <div className="lg:col-span-4 flex flex-col gap-4">
-          <SkeletonCardWrapper className="flex-1 flex flex-col justify-between">
-            <div className="flex justify-between items-center">
-              <Skeleton width={90} height={18} borderRadius={4} />
-              <Skeleton width={20} height={20} borderRadius={4} />
-            </div>
-            <div className="flex gap-2 justify-center my-3">
-              {Array.from({ length: 7 }).map((_, i) => (
-                <Skeleton key={i} width={28} height={40} borderRadius={8} />
-              ))}
-            </div>
-            <Skeleton width="100%" height={14} borderRadius={4} />
-          </SkeletonCardWrapper>
+        {/* Right Summaries */}
+        <div className="my-courses-overview__summaries-slot">
+          <div className="my-courses-overview__summaries">
+            <SkeletonCardWrapper className="h-full flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                <Skeleton width={90} height={18} borderRadius={4} />
+                <Skeleton width={20} height={20} borderRadius={4} />
+              </div>
+              <div className="flex gap-2 justify-center my-3">
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <Skeleton key={i} width={28} height={40} borderRadius={8} />
+                ))}
+              </div>
+              <Skeleton width="100%" height={14} borderRadius={4} />
+            </SkeletonCardWrapper>
 
-          <SkeletonCardWrapper className="flex-1 flex flex-col justify-between">
-            <div className="flex justify-between items-center">
-              <Skeleton width={90} height={18} borderRadius={4} />
-              <Skeleton width={60} height={22} borderRadius={6} />
-            </div>
-            <Skeleton width="100%" height={60} borderRadius={8} />
-            <Skeleton width="70%" height={12} borderRadius={4} />
-          </SkeletonCardWrapper>
+            <SkeletonCardWrapper className="h-full flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                <Skeleton width={90} height={18} borderRadius={4} />
+                <Skeleton width={60} height={22} borderRadius={6} />
+              </div>
+              <Skeleton width="100%" height={60} borderRadius={8} />
+              <Skeleton width="70%" height={12} borderRadius={4} />
+            </SkeletonCardWrapper>
+          </div>
         </div>
       </div>
 
