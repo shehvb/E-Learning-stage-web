@@ -1,8 +1,7 @@
 # GreenLearn — E-Learning Web Application Context
 
 <!-- SPECKIT START -->
-For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+Active Implementation Plan: [specs/001-dynamic-card-grid/plan.md](file:///c:/Users/shehab/OneDrive/Desktop/E-learning%20stage/web/specs/001-dynamic-card-grid/plan.md)
 <!-- SPECKIT END -->
 
 ## Project Overview
