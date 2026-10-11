@@ -16,6 +16,18 @@ import {
   LessonPlayerSkeleton,
 } from "../ui/Skeleton";
 
+import {
+  MobileHomeScreenSkeleton,
+  MobileMyCoursesScreenSkeleton,
+  MobileExploreScreenSkeleton,
+  MobileCalendarScreenSkeleton,
+  MobileAssignmentsScreenSkeleton,
+  MobileMessagesScreenSkeleton,
+  MobileCommunityScreenSkeleton,
+  MobileHelpCenterScreenSkeleton,
+  MobileSettingsScreenSkeleton,
+} from "../mobile/shared/MobilePageSkeletons";
+
 export interface RouteLoadingFallbackProps {
   message?: string;
   isMobile?: boolean;
@@ -29,6 +41,16 @@ export const RouteLoadingFallback: React.FC<RouteLoadingFallbackProps> = ({
   const pathname = location.pathname;
 
   if (isMobile) {
+    if (pathname === "/" || pathname === "") return <MobileHomeScreenSkeleton />;
+    if (pathname === "/my-courses") return <MobileMyCoursesScreenSkeleton />;
+    if (pathname.startsWith("/explore")) return <MobileExploreScreenSkeleton />;
+    if (pathname.startsWith("/calendar")) return <MobileCalendarScreenSkeleton />;
+    if (pathname.startsWith("/assignments")) return <MobileAssignmentsScreenSkeleton />;
+    if (pathname.startsWith("/messages")) return <MobileMessagesScreenSkeleton />;
+    if (pathname.startsWith("/community")) return <MobileCommunityScreenSkeleton />;
+    if (pathname.startsWith("/help")) return <MobileHelpCenterScreenSkeleton />;
+    if (pathname.startsWith("/settings") || pathname.startsWith("/profile")) return <MobileSettingsScreenSkeleton />;
+
     return (
       <div
         role="status"

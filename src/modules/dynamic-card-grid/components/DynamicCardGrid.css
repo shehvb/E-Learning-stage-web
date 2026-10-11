@@ -1,8 +1,15 @@
 /**
  * Dynamic Card Grid Layout Styles
  * Handles zero-gap fluid redistribution and container query setup.
+ *
+ * Canonical breakpoint reference: src/styles/breakpoints.ts & src/styles/breakpoints.css
+ * - Desktop zero-scroll: >= 1400px
+ * - Tablet / iPad fluid: 768px – 1399px
+ * - Mobile:              <= 767px
  */
 
+/* Default / Desktop Zero-Scroll Tier (>= 1400px):
+ * Preserves strict zero-scroll bento math and full size containment. */
 .dynamic-card-row {
   display: flex;
   flex-direction: row;
@@ -28,12 +35,30 @@
   position: relative;
 }
 
-/* Tablet & Mobile Breakpoints: Switch to stacked scroll layout where appropriate */
-@media (max-width: 820px) {
+/* Tablet & Fluid Scroll Tier (<= 1399px):
+ * Defined in src/styles/breakpoints.ts (BREAKPOINTS.TABLET_MAX = 1399).
+ * Rows and slots must never collapse or clip inside height: auto parents.
+ * Uses inline-size container type so child cards can continue evaluating width-based
+ * container queries (@container bento-slot (max-width: ...)) without collapsing height. */
+@media (max-width: 1399px) {
   .dynamic-card-row {
-    flex-direction: column;
     height: auto;
     overflow: visible;
+  }
+
+  .dynamic-card-slot {
+    height: auto;
+    overflow: visible;
+    container: bento-slot / inline-size;
+  }
+}
+
+/* Mobile Tier (<= 767px):
+ * Defined in src/styles/breakpoints.ts (BREAKPOINTS.MOBILE_MAX = 767).
+ * Switches multi-card rows to stacked vertical column layout on phone screens. */
+@media (max-width: 767px) {
+  .dynamic-card-row {
+    flex-direction: column;
   }
 
   .dynamic-card-slot {
@@ -43,3 +68,4 @@
     flex: none;
   }
 }
+

@@ -16,6 +16,8 @@ import {
   AddEventSheet,
   ReminderRow,
   MobileWeeklyStudyGoal,
+  MobileCalendarScreenSkeleton,
+  useMobileScreenLoading,
 } from "../shared";
 import {
   INITIAL_CALENDAR_EVENTS,
@@ -244,6 +246,12 @@ export const CalendarScreen: React.FC = () => {
     setViewMode("week");
     setToastMessage(`"${newEvent.title}" added to your calendar`);
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileCalendarScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

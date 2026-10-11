@@ -43,7 +43,7 @@ src/
 ## Key Engineering Rules
 1. **Zero Visual & Behavioral Regressions**: Refactorings must preserve pixel-perfect aesthetics, animations, and behaviors.
 2. **Modular File Sizes**: Keep components under 300-400 lines; extract helpers, subcomponents, and types into separate files.
-3. **Responsive Breakpoints**: Honor the unified breakpoint standard (`1199px`, `1024px`, `820px`, `768px`) and CSS container queries.
+3. **Responsive Breakpoints**: Honor canonical responsive tiers from `src/styles/breakpoints.ts` (mobile ≤767px, tablet/iPad 768–1399px, desktop zero-scroll ≥1400px) and CSS container queries.
 4. **Verification Gates**: Always run `npx tsc --noEmit` and `npm run build` to verify changes before marking tasks complete.
 
 ## SpecKit Workflow

@@ -7,6 +7,8 @@ import {
   AssignmentCard,
   AssignmentProgressRing,
   MobileToast,
+  MobileAssignmentsScreenSkeleton,
+  useMobileScreenLoading,
 } from "../shared";
 import { useScreenStack } from "../ScreenStack";
 import { useToast } from "../../../hooks/useToast";
@@ -134,6 +136,12 @@ export const AssignmentsScreen: React.FC = () => {
   const handleBookmarkToast = (isSaved: boolean) => {
     showToast(isSaved ? "Saved to your bookmarks." : "Removed from bookmarks.");
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileAssignmentsScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

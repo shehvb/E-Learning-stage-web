@@ -569,14 +569,64 @@ main[data-main-workspace] {
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  overflow-y: auto !important;
-  overflow-x: hidden;
+  overflow: hidden;
   padding: clamp(8px, 1vw, 16px) clamp(12px, 1.5vw, 28px);
-  -webkit-overflow-scrolling: touch;
+}
+
+/* On large screens (>=1200px and height > 850px), profile fills viewport without outer scrolling */
+@media (min-width: 1200px) and (min-height: 851px) {
+  .student-dashboard--profile {
+    height: 100%;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .student-dashboard--profile .student-dashboard__content {
+    overflow: hidden !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: clamp(6px, 0.8vh, 12px) clamp(16px, 1.5vw, 32px) clamp(8px, 1vh, 14px) !important;
+  }
+
+  .student-dashboard--profile .profile-page {
+    overflow: hidden !important;
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .student-dashboard--profile .profile-tab-content {
+    overflow: hidden !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 6px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .student-dashboard--profile .overview-tab-root {
+    overflow: hidden !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .student-dashboard--profile .overview-tab-grid {
+    grid-template-rows: minmax(0, 1.15fr) minmax(0, 1fr) auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    gap: clamp(10px, 0.9vw, 16px) !important;
+  }
+
+  .student-dashboard--profile .overview-tab-grid > section {
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    padding: clamp(12px, 1.2vw, 18px) !important;
+  }
 }
 
 /* iPad Mini / iPad Air Landscape & Portrait or any short-height displays */
-@media (max-width: 1200px),
+@media (max-width: 1199px),
 (max-height: 850px) {
   .student-dashboard--profile {
     max-height: none;
@@ -598,6 +648,34 @@ main[data-main-workspace] {
     min-height: 0;
     padding: 8px 14px 24px;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .student-dashboard--profile .profile-page {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100% !important;
+  }
+
+  .student-dashboard--profile .profile-tab-content {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .student-dashboard--profile .overview-tab-root {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .student-dashboard--profile .overview-tab-grid {
+    grid-template-rows: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .student-dashboard--profile .overview-tab-grid > section {
+    height: auto !important;
+    min-height: 160px;
   }
 }
 

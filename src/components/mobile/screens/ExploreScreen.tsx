@@ -11,6 +11,8 @@ import {
   ResourceCard,
   AdvancedFilterSheet,
   EmptyState,
+  MobileExploreScreenSkeleton,
+  useMobileScreenLoading,
   type LearningPath,
   type ResourceCardData,
   type CategoryItem,
@@ -287,6 +289,12 @@ export const ExploreScreen: React.FC = () => {
     advancedFilters.minRating > 0;
 
   const totalResults = filteredTrending.length + filteredModules.length;
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileExploreScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

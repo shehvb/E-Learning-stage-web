@@ -23,6 +23,7 @@ import { CategoryChipsRow } from "../shared/CategoryChipsRow";
 import { SectionHeader } from "../shared/SectionHeader";
 import { TrendingRow } from "../shared/TrendingRow";
 import { MobileToast } from "../shared/MobileToast";
+import { MobileCommunityScreenSkeleton, useMobileScreenLoading } from "../shared";
 import { ChatConversationScreen } from "./ChatConversationScreen";
 import {
   INITIAL_FEATURED_GROUP,
@@ -266,6 +267,12 @@ export const CommunityScreen: React.FC = () => {
     setFeaturedGroup((prev) => ({ ...prev, isJoined: next }));
     showToast(next ? `Joined ${featuredGroup.title}` : `Left ${featuredGroup.title}`);
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileCommunityScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

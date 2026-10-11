@@ -11,7 +11,7 @@ export const ProfileQuoteBanner: React.FC<ProfileQuoteBannerProps> = ({
   userName = "Juliana",
 }) => {
   return (
-    <div className="relative shrink-0 mt-2 overflow-hidden rounded-xl border border-emerald-100 bg-linear-to-r from-emerald-50/70 via-[#f3faf6] to-emerald-50/50 px-4 py-2 shadow-2xs">
+    <div className="relative shrink-0 overflow-hidden rounded-xl border border-emerald-100 bg-linear-to-r from-emerald-50/70 via-[#f3faf6] to-emerald-50/50 px-4 py-2 shadow-2xs">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
         {/* Left / Center Quote */}
         <div className="flex items-center gap-3 mx-auto sm:mx-0">

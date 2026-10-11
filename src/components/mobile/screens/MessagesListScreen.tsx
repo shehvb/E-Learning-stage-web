@@ -4,6 +4,7 @@ import { useScreenStack } from "../ScreenStack";
 import { useMobileMessages } from "../data/useMobileMessages";
 import { MobileSearchBar } from "../shared/MobileSearchBar";
 import { HeroBand } from "../shared/HeroBand";
+import { MobileMessagesScreenSkeleton, useMobileScreenLoading } from "../shared";
 import { ChatConversationScreen } from "./ChatConversationScreen";
 
 export const MessagesListScreen: React.FC = () => {
@@ -36,6 +37,12 @@ export const MessagesListScreen: React.FC = () => {
       ),
     });
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileMessagesScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

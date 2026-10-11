@@ -23,6 +23,7 @@ import { useScreenStack } from "../ScreenStack";
 import { TopAppBar } from "../TopAppBar";
 import { BottomSheet } from "../shared/BottomSheet";
 import { MobileToast } from "../shared/MobileToast";
+import { MobileSettingsScreenSkeleton, useMobileScreenLoading } from "../shared";
 import { useMobileMessages } from "../data/useMobileMessages";
 import { MessagesListScreen } from "./MessagesListScreen";
 import { CommunityScreen } from "./CommunityScreen";
@@ -156,6 +157,12 @@ export const SettingsScreen: React.FC = () => {
       component: <HelpCenterScreen />,
     });
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileSettingsScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-[#f8fafc]">

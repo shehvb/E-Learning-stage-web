@@ -9,6 +9,8 @@ import {
   CourseCard,
   DocumentListRow,
   MobileWeeklyStudyGoal,
+  MobileHomeScreenSkeleton,
+  useMobileScreenLoading,
   type CourseCardData,
   type DocumentItem,
 } from "../shared";
@@ -54,6 +56,11 @@ const MOCK_RECENT_DOCS: DocumentItem[] = [
 
 export const HomeScreen: React.FC = () => {
   const { push } = useScreenStack();
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileHomeScreenSkeleton />;
+  }
 
   // Navigation handlers
   const handleOpenAssignments = () => {

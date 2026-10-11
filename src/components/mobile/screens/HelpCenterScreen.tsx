@@ -26,6 +26,7 @@ import { CategoryChipsRow } from "../shared/CategoryChipsRow";
 import { SectionHeader } from "../shared/SectionHeader";
 import { ReminderRow } from "../shared/ReminderRow";
 import { MobileToast } from "../shared/MobileToast";
+import { MobileHelpCenterScreenSkeleton, useMobileScreenLoading } from "../shared";
 import { FileAttachmentPicker, AttachedFile } from "../shared/FileAttachmentPicker";
 import { ChatConversationScreen } from "./ChatConversationScreen";
 import {
@@ -179,6 +180,12 @@ export const HelpCenterScreen: React.FC = () => {
       setSearchQuery(key);
     }
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileHelpCenterScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">

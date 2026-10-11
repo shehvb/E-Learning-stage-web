@@ -8,6 +8,8 @@ import {
   CourseCard,
   BottomSheet,
   EmptyState,
+  MobileMyCoursesScreenSkeleton,
+  useMobileScreenLoading,
   type CourseCardData,
 } from "../shared";
 import { Clock, ChevronDown, Check, BookOpen, Sparkles } from "lucide-react";
@@ -101,6 +103,12 @@ export const MyCoursesScreen: React.FC = () => {
     // Navigate to actual refresh-safe route
     navigate(`/my-courses/${course.slug || "human-anatomy-i"}`);
   };
+
+  const isLoading = useMobileScreenLoading();
+
+  if (isLoading) {
+    return <MobileMyCoursesScreenSkeleton />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 w-full bg-slate-50/50">
