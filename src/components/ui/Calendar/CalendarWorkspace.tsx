@@ -61,7 +61,6 @@ export function CalendarWorkspace() {
   });
 
   const [isEditGoalModalOpen, setIsEditGoalModalOpen] = useState(false);
-  const [targetGoalInput, setTargetGoalInput] = useState<number>(studyGoal.targetHours);
 
   const [isAddReminderModalOpen, setIsAddReminderModalOpen] = useState(false);
   const [newReminderTitle, setNewReminderTitle] = useState("");
@@ -329,9 +328,8 @@ export function CalendarWorkspace() {
     setSelectedEvent(null);
   };
 
-  const handleSaveGoal = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newTarget = Math.max(1, targetGoalInput);
+  const handleSaveGoal = (hours: number) => {
+    const newTarget = Math.max(1, hours);
     const newPct = Math.min(100, Math.round((studyGoal.completedHours / newTarget) * 100));
     setStudyGoal((prev) => ({ ...prev, targetHours: newTarget, weeklyPercentage: newPct }));
     setIsEditGoalModalOpen(false);
@@ -427,10 +425,8 @@ export function CalendarWorkspace() {
             setIsNewEventModalOpen(true);
           }}
           onViewFullAgenda={() => setViewMode("week")}
-          onEditGoal={() => {
-            setTargetGoalInput(studyGoal.targetHours);
-            setIsEditGoalModalOpen(true);
-          }}
+          onEditGoal={() => setIsEditGoalModalOpen(true)}
+
           onAddReminder={() => setIsAddReminderModalOpen(true)}
           onViewAllReminders={() => setIsAddReminderModalOpen(true)}
         />
@@ -462,10 +458,9 @@ export function CalendarWorkspace() {
       {/* Modal 3: Edit Study Goal */}
       {isEditGoalModalOpen && (
         <EditStudyGoalModal
-          targetGoalInput={targetGoalInput}
+          targetGoalInput={studyGoal.targetHours}
           onClose={() => setIsEditGoalModalOpen(false)}
-          onSubmit={handleSaveGoal}
-          onTargetChange={setTargetGoalInput}
+          onSaveGoal={handleSaveGoal}
         />
       )}
 

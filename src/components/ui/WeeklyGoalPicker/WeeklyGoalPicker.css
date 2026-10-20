@@ -1,0 +1,339 @@
+/* =====================================================================
+   WeeklyGoalPicker — Redesigned "Dial" component styles
+   Fluid scaling for 1980x1080 down to 1980x822 and iPad viewports
+   ===================================================================== */
+.weekly-goal-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  text-align: center;
+}
+
+/* ── Hero Row ────────────────────────────────────────────────────────── */
+.weekly-goal-picker__hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.weekly-goal-picker__stepper-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(28px, 9cqh, 34px);
+  height: clamp(28px, 9cqh, 34px);
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-subtle, #e2e8f0);
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text-primary, #0f172a);
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 100ms ease;
+}
+/* Guarantee 44px minimum touch/hit area regardless of visual button size */
+.weekly-goal-picker__stepper-btn::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+.weekly-goal-picker__stepper-btn:hover:not(:disabled) {
+  border-color: #86efac;
+  background-color: #f0fdf4;
+  color: #16a34a;
+}
+.weekly-goal-picker__stepper-btn:active:not(:disabled) { transform: scale(0.94); }
+.weekly-goal-picker__stepper-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.weekly-goal-picker__stepper-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--color-brand, #20a862);
+}
+
+.weekly-goal-picker__hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+}
+.weekly-goal-picker__number-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+.weekly-goal-picker__number {
+  font-size: clamp(22px, 8.5cqh, 34px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-text-primary, #0f172a);
+  font-variant-numeric: tabular-nums;
+}
+.weekly-goal-picker__unit {
+  font-size: clamp(11px, 3.5cqh, 13px);
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  white-space: nowrap;
+}
+.weekly-goal-picker__custom-tag {
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 9999px;
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.weekly-goal-picker__daily-hint {
+  font-size: clamp(10.5px, 3.2cqh, 11.5px);
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  margin-top: 1px;
+  line-height: 1.1;
+}
+
+/* ── Range Slider ────────────────────────────────────────────────────── */
+.weekly-goal-picker__slider-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.weekly-goal-picker__track-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(20px, 6.5cqh, 26px);
+  display: flex;
+  align-items: center;
+}
+.weekly-goal-picker__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    var(--color-brand, #20a862) 0%,
+    var(--color-brand, #20a862) var(--slider-pct, 50%),
+    #e2e8f0 var(--slider-pct, 50%),
+    #e2e8f0 100%
+  );
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+/* WebKit thumb */
+.weekly-goal-picker__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: clamp(22px, 7cqh, 26px);
+  height: clamp(22px, 7cqh, 26px);
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--color-brand, #20a862);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.weekly-goal-picker__range::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 10px rgba(32, 168, 98, 0.35);
+}
+.weekly-goal-picker__range::-webkit-slider-thumb:active { transform: scale(0.96); }
+
+/* Firefox thumb and track */
+.weekly-goal-picker__range::-moz-range-thumb {
+  width: clamp(22px, 7cqh, 26px);
+  height: clamp(22px, 7cqh, 26px);
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--color-brand, #20a862);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.weekly-goal-picker__range::-moz-range-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 10px rgba(32, 168, 98, 0.35);
+}
+.weekly-goal-picker__range::-moz-range-track {
+  height: 5px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+}
+.weekly-goal-picker__range::-moz-range-progress {
+  height: 5px;
+  background: var(--color-brand, #20a862);
+  border-radius: 9999px;
+}
+.weekly-goal-picker__range:focus-visible::-webkit-slider-thumb,
+.weekly-goal-picker__range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--color-brand, #20a862);
+  outline-offset: 3px;
+}
+
+/* Tick dots */
+.weekly-goal-picker__ticks { position: absolute; inset: 0; pointer-events: none; }
+.weekly-goal-picker__tick {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #94a3b8;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+.weekly-goal-picker__tick--passed {
+  background: #ffffff;
+  border: 1px solid var(--color-brand, #20a862);
+}
+.weekly-goal-picker__slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  padding: 0 2px;
+  line-height: 1;
+}
+
+/* ── Preset Pills (2x2 Grid) ────────────────────────────────────────── */
+.weekly-goal-picker__presets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(4px, 1.3cqh, 6px);
+  width: 100%;
+}
+.weekly-goal-picker__preset-pill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: clamp(2.5px, 0.9cqh, 5px) 4px;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-border-subtle, #e2e8f0);
+  background: var(--color-surface, #ffffff);
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+}
+.weekly-goal-picker__preset-pill:hover { border-color: #86efac; background-color: #f0fdf4; }
+.weekly-goal-picker__preset-pill:active { transform: scale(0.97); }
+.weekly-goal-picker__preset-pill--selected {
+  border-color: var(--color-brand, #20a862);
+  background-color: #ecfdf5;
+  box-shadow: 0 0 0 1px var(--color-brand, #20a862);
+}
+.weekly-goal-picker__preset-pill:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--color-brand, #20a862);
+}
+.weekly-goal-picker__preset-hours {
+  font-size: clamp(11.5px, 3.4cqh, 13.5px);
+  font-weight: 700;
+  color: var(--color-text-primary, #0f172a);
+  line-height: 1;
+}
+.weekly-goal-picker__preset-pill--selected .weekly-goal-picker__preset-hours { color: #15803d; }
+.weekly-goal-picker__preset-label {
+  font-size: clamp(10px, 3cqh, 11px);
+  font-weight: 600;
+  color: #334155;
+  line-height: 1;
+  margin-top: 1px;
+}
+.weekly-goal-picker__preset-pill--selected .weekly-goal-picker__preset-label { color: #166534; }
+.weekly-goal-picker__preset-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.weekly-goal-picker__badge {
+  display: inline-flex;
+  align-items: center;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 7.5px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────── */
+.weekly-goal-picker__actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+.weekly-goal-picker__btn-confirm {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(30px, 9.5cqh, 36px);
+  padding: 0 16px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #16a34a 0%, #20a862 100%);
+  color: #ffffff;
+  font-size: clamp(12px, 3.6cqh, 13.5px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.28);
+}
+.weekly-goal-picker__btn-confirm:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+}
+.weekly-goal-picker__btn-confirm:active:not(:disabled) { transform: translateY(0); }
+.weekly-goal-picker__btn-confirm:disabled { opacity: 0.6; cursor: not-allowed; }
+.weekly-goal-picker__btn-confirm:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--color-brand, #20a862);
+}
+
+.weekly-goal-picker__btn-cancel {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(30px, 9.5cqh, 36px);
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-border-subtle, #e2e8f0);
+  background: #f8fafc;
+  color: #475569;
+  font-size: clamp(12px, 3.5cqh, 13px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.weekly-goal-picker__btn-cancel:hover { background-color: #f1f5f9; color: #1e293b; }
+.weekly-goal-picker__btn-cancel:focus-visible { outline: none; box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #94a3b8; }
+
+/* ── Reduced Motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .weekly-goal-picker,
+  .weekly-goal-picker * {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+}
