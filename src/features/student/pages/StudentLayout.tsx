@@ -1,7 +1,8 @@
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppShell } from "../../../components/layout/AppShell";
 import { SearchBar } from "../../../components/ui/SearchBar";
 import { UserHeaderActions } from "../../../components/ui/UserHeaderActions";
+import { PageBreadcrumb } from "../../../components/ui/PageBreadcrumb";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 import { MobileLayout } from "../../../components/mobile/MobileLayout";
 import { useGamification } from "../../../app/providers/GamificationProvider";
@@ -83,104 +84,116 @@ export function StudentLayout() {
   const renderBreadcrumb = () => {
     if (isSettings) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label">LEARNING SPACE</span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <h1>Settings</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[{ label: "LEARNING SPACE", to: "/" }]}
+          title="Settings"
+        />
       );
     }
 
     if (isHelp) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label">LEARNING SPACE</span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <h1>Help Center</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[{ label: "LEARNING SPACE", to: "/" }]}
+          title="Help Center"
+        />
       );
     }
 
     if (isInstructorProfile) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label font-bold text-emerald-600">
-            Profile
-          </span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">
-            /
-          </span>
-          <h1>Instructor Profile</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[{ label: "PROFILE", to: "/" }]}
+          title="Instructor Profile"
+        />
       );
     }
 
     if (isProfile) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label">Student Account</span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <h1>My Profile</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[{ label: "STUDENT ACCOUNT", to: "/" }]}
+          title="My Profile"
+        />
       );
     }
 
     if (isCommunity) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label">Learning space</span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <h1>Community</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[{ label: "LEARNING SPACE", to: "/" }]}
+          title="Community"
+        />
       );
     }
 
     if (isCourseOverview) {
       return (
-        <nav className="student-dashboard__course-breadcrumb" aria-label="Lesson breadcrumb">
-          <Link to="/my-courses">My Courses</Link>
-          <span aria-hidden="true">›</span>
-          <h1 id="course-overview-title" className="student-dashboard__course-breadcrumb-title">{currentCourseTitle}</h1>
-        </nav>
+        <PageBreadcrumb
+          trail={[{ label: "MY COURSES", to: "/my-courses" }]}
+          title={currentCourseTitle}
+        />
       );
     }
 
     if (isLessonPlayer) {
       return (
-        <nav className="student-dashboard__course-breadcrumb" aria-label="Lesson breadcrumb">
-          <Link to="/my-courses">My Courses</Link>
-          <span aria-hidden="true">›</span>
-          <Link to={`/my-courses/${currentCourseId}`} state={{ courseTitle: currentCourseTitle, courseId: currentCourseId }}>{currentCourseTitle}</Link>
-          <span aria-hidden="true">›</span>
-          <strong aria-current="page">Lesson Player</strong>
-        </nav>
+        <PageBreadcrumb
+          trail={[
+            { label: "MY COURSES", to: "/my-courses" },
+            { label: currentCourseTitle.toUpperCase(), to: `/my-courses/${currentCourseId}` },
+          ]}
+          title="Lesson Player"
+        />
       );
     }
 
     if (isAssignmentDetail) {
       return (
-        <div className="student-dashboard__page-title">
-          <span className="student-dashboard__page-title-label">Learning space</span>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <Link to="/assignments" style={{ color: "inherit", textDecoration: "none" }}>
-            <span style={{ color: "#64748b", fontWeight: 600 }}>Assignments</span>
-          </Link>
-          <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-          <h1>Clinical Case Review</h1>
-        </div>
+        <PageBreadcrumb
+          trail={[
+            { label: "LEARNING SPACE", to: "/" },
+            { label: "ASSIGNMENTS", to: "/assignments" },
+          ]}
+          title="Clinical Case Review"
+        />
+      );
+    }
+
+    if (isMyCourses) {
+      return (
+        <PageBreadcrumb
+          trail={[{ label: "LEARNING SPACE", to: "/" }]}
+          title="My Courses"
+        />
       );
     }
 
     let title = "Dashboard";
-    if (isMyCourses) title = "My Courses";
-    else if (isExplore) title = "Explore";
-    else if (isAssignments) title = "Assignments";
-    else if (isCalendar) title = "Calendar";
-    else if (isMessages) title = "Messages";
-    else if (isTestInactivity) title = "Inactivity Prompt Test";
-    else if (isTestXP) title = "XP Reward Test";
-    else if (isTestStreak) title = "Streak Analytics Test";
-    else {
+    let trailLabel = "LEARNING SPACE";
+
+    if (isExplore) {
+      title = "Explore";
+      trailLabel = "DISCOVER";
+    } else if (isAssignments) {
+      title = "Assignments";
+      trailLabel = "LEARNING SPACE";
+    } else if (isCalendar) {
+      title = "Calendar";
+      trailLabel = "SCHEDULE";
+    } else if (isMessages) {
+      title = "Messages";
+      trailLabel = "COMMUNICATION";
+    } else if (isTestInactivity) {
+      title = "Inactivity Prompt Test";
+      trailLabel = "TESTING";
+    } else if (isTestXP) {
+      title = "XP Reward Test";
+      trailLabel = "TESTING";
+    } else if (isTestStreak) {
+      title = "Streak Analytics Test";
+      trailLabel = "TESTING";
+    } else {
       const segments = pathname.split("/").filter(Boolean);
       const lastSegment = segments[segments.length - 1] || "Dashboard";
       title = lastSegment
@@ -190,11 +203,10 @@ export function StudentLayout() {
     }
 
     return (
-      <div className="student-dashboard__page-title">
-        <span className="student-dashboard__page-title-label">Learning space</span>
-        <span className="student-dashboard__page-title-separator" aria-hidden="true">/</span>
-        <h1>{title}</h1>
-      </div>
+      <PageBreadcrumb
+        trail={[{ label: trailLabel, to: "/" }]}
+        title={title}
+      />
     );
   };
 

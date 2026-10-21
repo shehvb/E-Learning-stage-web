@@ -1,0 +1,275 @@
+.page-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.page-breadcrumb__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 4px 12px -2px rgba(16, 185, 129, 0.28);
+  flex-shrink: 0;
+  text-decoration: none;
+  margin-right: 14px;
+}
+
+.page-breadcrumb__chip:focus-visible {
+  outline: 2px solid var(--color-brand, #20a862);
+  outline-offset: 2px;
+}
+
+/* Ambient wash behind chip: soft radial mint gradient, no blur filters */
+.page-breadcrumb__chip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(209, 250, 229, 0.4) 0%, rgba(209, 250, 229, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.page-breadcrumb__list {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 8px;
+}
+
+.page-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.page-breadcrumb__item--trail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.page-breadcrumb__trail-link,
+.page-breadcrumb__trail-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #047857; /* emerald-700 (contrast > 4.5:1 against white) */
+  white-space: nowrap;
+}
+
+.page-breadcrumb__trail-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.page-breadcrumb__trail-link:hover {
+  color: #059669; /* emerald-600 */
+}
+
+.page-breadcrumb__trail-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: #059669;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-breadcrumb__trail-link:hover::after {
+  transform: scaleX(1);
+}
+
+.page-breadcrumb__trail-link:focus-visible {
+  outline: 2px solid var(--color-brand, #20a862);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.page-breadcrumb__chevron {
+  color: #cbd5e1; /* slate-300 */
+  size: 14px;
+  flex-shrink: 0;
+}
+
+.page-breadcrumb__item--current {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.page-breadcrumb__title-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.page-breadcrumb__title {
+  margin: 0;
+  color: var(--color-text-primary, #111827);
+  font-family: var(--font-heading, "Montserrat", sans-serif);
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── ECG pulse SVG ────────────────────────────────────────────────────────── */
+/* Positioned absolutely below the h1, left-aligned to the title's left edge */
+.page-breadcrumb__pulse {
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+  transform-origin: left center;
+  /* Color token: emerald-700 in light mode, emerald-400 in dark */
+  color: #047857;
+  /* Outer envelope: subtle scale + glow pulsing at the same 2 s period */
+  animation: page-breadcrumb-pulse-beat 2s ease-in-out infinite;
+}
+
+/* Dark-mode color token */
+@media (prefers-color-scheme: dark) {
+  .page-breadcrumb__pulse {
+    color: #34d399;
+  }
+}
+
+/* ECG trace path: draws itself left-to-right every 2 s then resets */
+.page-breadcrumb__ecg-path {
+  /*
+    stroke-dasharray = total visible segment length.
+    220 covers the full path length generously so the whole trace is drawn
+    at peak, then a matching 220-unit gap hides the next repeat.
+    On each cycle the dashoffset travels from 220 (fully hidden) to 0 (fully shown).
+  */
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: page-breadcrumb-ecg-draw 2s ease-in-out infinite;
+  /* Soft glow matching the trace */
+  filter: drop-shadow(0 0 2px currentColor);
+}
+
+/* Draw animation: offsets the dashes to reveal the path from left to right */
+@keyframes page-breadcrumb-ecg-draw {
+  /* 0 %: trace fully hidden (offset = total length) */
+  0% {
+    stroke-dashoffset: 220;
+    opacity: 0.55;
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+  /* ~8%: start of first beat — trace begins appearing */
+  8% {
+    opacity: 0.9;
+  }
+  /* ~35%: QRS spike has just passed through — bright flash */
+  30% {
+    stroke-dashoffset: 130;
+    opacity: 1;
+    filter: drop-shadow(0 0 3.5px currentColor);
+  }
+  /* ~55%: T-wave hump drawn, settling back */
+  55% {
+    stroke-dashoffset: 50;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 1.5px currentColor);
+  }
+  /* 72 %: trace fully drawn, hold briefly */
+  72% {
+    stroke-dashoffset: 0;
+    opacity: 0.65;
+    filter: drop-shadow(0 0 0.5px currentColor);
+  }
+  /* 100%: stay visible until next cycle resets — matches pulse-beat resting opacity */
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.65;
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+/* Outer SVG envelope: lub-dub scale/opacity in sync with ECG draw */
+@keyframes page-breadcrumb-pulse-beat {
+  0%, 100% {
+    opacity: 0.65;
+    transform: scaleY(1);
+  }
+  /* First beat (lub) — aligns with the QRS spike drawn at ~30% */
+  28% {
+    opacity: 1;
+    transform: scaleY(1.2);
+  }
+  36% {
+    opacity: 0.8;
+    transform: scaleY(0.96);
+  }
+  /* Second beat (dub) — T-wave at ~55% */
+  52% {
+    opacity: 1;
+    transform: scaleY(1.14);
+  }
+  65% {
+    opacity: 0.65;
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-breadcrumb__pulse {
+    animation: none;
+    opacity: 0.65;
+  }
+  .page-breadcrumb__ecg-path {
+    animation: none;
+    stroke-dashoffset: 0;
+    filter: none;
+  }
+}
+
+.page-breadcrumb__item--meta {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+/* Canonical mobile tier: collapse trail to just the chip, title truncates */
+@media (max-width: 767px) {
+  .page-breadcrumb__item--trail {
+    display: none;
+  }
+}
