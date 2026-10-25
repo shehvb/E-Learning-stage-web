@@ -50,9 +50,27 @@ export function StudentLayout() {
     return <MobileLayout />;
   }
 
-  // Prevent flash while measuring initial viewport on client mount
+  // While viewport is being measured, render the desktop shell so the sidebar
+  // and header chrome are always visible — never return null (which strips layout).
   if (isMobile === undefined) {
-    return null;
+    return (
+      <AppShell>
+        <div className="student-dashboard student-dashboard--home">
+          <header className="student-dashboard__header student-dashboard__header--home" aria-label="Student dashboard header">
+            <div className="student-dashboard__search">
+              {/* Search bar skeleton */}
+              <div style={{ height: 40, borderRadius: 10, background: 'var(--color-bg-muted, #f0f4f2)', opacity: 0.7 }} />
+            </div>
+            <div className="student-dashboard__actions">
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--color-bg-muted, #f0f4f2)', opacity: 0.7 }} />
+            </div>
+          </header>
+          <div className="student-dashboard__content">
+            <RouteLoadingFallback />
+          </div>
+        </div>
+      </AppShell>
+    );
   }
 
   const courseRouteMatch = pathname.match(/^\/my-courses\/([^/]+)(?:\/lessons\/([^/]+))?$/);

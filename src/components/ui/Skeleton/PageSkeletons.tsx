@@ -1,6 +1,7 @@
 import React from "react";
 import { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from "./Skeleton";
 import "../Explore/Explore.css";
+import "../../../features/student/components/DashboardBento/DashboardBento.css";
 
 /**
  * Universal Card Skeleton container with customizable layout

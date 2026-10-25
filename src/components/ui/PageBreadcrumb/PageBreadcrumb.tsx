@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { motion, useReducedMotion, type Transition } from "framer-motion";
+import { BreadcrumbEcg } from "./BreadcrumbEcg";
 import "./PageBreadcrumb.css";
 
 export interface BreadcrumbTrailItem {
@@ -134,38 +135,8 @@ export function PageBreadcrumb({
               </span>
             )}
 
-            {/*
-              Signature ECG accent: animated EKG trace sitting under title edge.
-              Width = 120 px (~45 % wider than the original 82 px).
-              Left edge is flush with the h1's left edge via position: absolute; left: 0
-              on the SVG (relative to .page-breadcrumb__title-wrapper).
-              The path encodes a real ECG waveform:
-                flat baseline → P-wave bump (11,5.5) → flat → Q-dip (22,8.5) →
-                R-spike (24,1) → S-dip (26,13) → flat ST → T-wave (40,4.5) →
-                flat tail to x=120.
-              The stroke-dashoffset animation in PageBreadcrumb.css redraws the
-              line left-to-right every 2 s; the outer SVG scaleY pulse-beat
-              keyframe is timed to match (lub at ~28 %, dub at ~52 %).
-            */}
-            <svg
-              className="page-breadcrumb__pulse"
-              width="108"
-              height="14"
-              viewBox="0 0 120 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                className="page-breadcrumb__ecg-path"
-                d="M 0 7 L 8 7 L 11 5.5 L 14 7 L 20 7 L 22 8.5 L 24 1 L 26 13 L 28 7 L 36 7 L 40 4.5 L 44 7 L 52 7 L 120 7"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
+            {/* Animated Canvas ECG — oscilloscope sweep that draws itself every beat */}
+            <BreadcrumbEcg bpm={72} />
           </motion.div>
         </li>
 
