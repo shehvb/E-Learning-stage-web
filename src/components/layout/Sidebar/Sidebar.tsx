@@ -91,7 +91,15 @@ export function Sidebar() {
       </nav>
 
       <div className="relative">
-        {isAuthenticated ? (
+        {auth.status === "loading" ? (
+          <div className="flex w-full min-h-19.5 shrink-0 items-center gap-3 rounded-2.5 bg-slate-100/70 px-3 animate-pulse">
+            <div className="size-11 rounded-full bg-slate-200" />
+            <div className="flex-1 space-y-1.5">
+              <div className="h-4 w-24 rounded bg-slate-200" />
+              <div className="h-3 w-16 rounded bg-slate-200" />
+            </div>
+          </div>
+        ) : isAuthenticated ? (
           <button
             type="button"
             className={`sidebar-profile flex w-full min-h-19.5 shrink-0 items-center gap-3 rounded-2.5 bg-(--color-brand-soft) px-3 text-left transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-focus-ring) ${

@@ -7,8 +7,13 @@ import { useEffect, useState } from "react";
  * Returns `boolean | undefined` — initially `undefined` until the first client measurement
  * to avoid layout flash on load.
  */
-export function useIsMobile(): boolean | undefined {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
+export function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 767px)").matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -17,7 +22,7 @@ export function useIsMobile(): boolean | undefined {
       setIsMobile(e.matches);
     };
 
-    // Initial check
+    // Keep state in sync
     setIsMobile(mql.matches);
 
     // Subscribe to breakpoint transitions

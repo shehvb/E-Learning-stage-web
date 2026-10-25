@@ -10,6 +10,7 @@ import {
   SettingsSkeleton,
   HelpCenterSkeleton,
   ProfileSkeleton,
+  AssignmentDetailSkeleton,
 } from "../../../../components/ui/Skeleton";
 import { SearchBar } from "../../../../components/ui/SearchBar";
 
@@ -33,6 +34,7 @@ export function TestSkeletonPage() {
             { id: "explore", label: "Explore" },
             { id: "calendar", label: "Calendar" },
             { id: "assignments", label: "Assignments" },
+            { id: "assignment-detail", label: "Assignment Detail" },
             { id: "messages", label: "Messages" },
             { id: "community", label: "Community" },
             { id: "settings", label: "Settings" },
@@ -82,6 +84,7 @@ export function TestSkeletonPage() {
         {selectedView === "explore" && <ExploreSkeleton />}
         {selectedView === "calendar" && <CalendarSkeleton />}
         {selectedView === "assignments" && <AssignmentsSkeleton />}
+        {selectedView === "assignment-detail" && <AssignmentDetailSkeleton />}
         {selectedView === "messages" && <div className="h-150"><MessagesSkeleton /></div>}
         {selectedView === "community" && <div className="h-150"><CommunitySkeleton /></div>}
         {selectedView === "settings" && <SettingsSkeleton />}

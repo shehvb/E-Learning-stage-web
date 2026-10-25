@@ -14,6 +14,7 @@ import {
   ProfileSkeleton,
   CourseOverviewSkeleton,
   LessonPlayerSkeleton,
+  AssignmentDetailSkeleton,
 } from "../ui/Skeleton";
 
 import {
@@ -104,6 +105,9 @@ export const RouteLoadingFallback: React.FC<RouteLoadingFallbackProps> = ({
   }
 
   // 6. Assignments
+  if (pathname.startsWith("/assignments/") && pathname !== "/assignments") {
+    return <AssignmentDetailSkeleton />;
+  }
   if (pathname.startsWith("/assignments")) {
     return <AssignmentsSkeleton />;
   }
@@ -126,6 +130,11 @@ export const RouteLoadingFallback: React.FC<RouteLoadingFallbackProps> = ({
   // 10. Settings
   if (pathname.startsWith("/settings")) {
     return <SettingsSkeleton />;
+  }
+
+  // 11. Instructors & Instructor Profile
+  if (pathname.startsWith("/instructor-profile") || pathname.startsWith("/instructors")) {
+    return <ProfileSkeleton activeTab="overview" />;
   }
 
   // Fallback for sub-routes or unknown pages

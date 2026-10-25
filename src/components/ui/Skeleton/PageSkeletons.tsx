@@ -57,7 +57,243 @@ export const SkeletonHeroCard: React.FC<{
  * Matches DashboardBento 3-row layout:
  * - Top row: Continue Learning + AI Guide + Weekly Goal
  * - Middle row: Progress + Upcoming + Streak
- * - Bottom row: Recommended Subjects Grid
+/**
+ * Specific Bento Slot Skeletons for Home Dashboard
+ */
+export const ContinueLearningSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center justify-between pb-2">
+      <Skeleton width={140} height={20} borderRadius={6} />
+      <div className="flex items-center gap-1.5">
+        <Skeleton width={28} height={28} borderRadius={8} />
+        <Skeleton width={28} height={28} borderRadius={8} />
+      </div>
+    </div>
+
+    <div className="flex items-center gap-3.5 my-auto">
+      <Skeleton width={115} height={85} borderRadius={12} className="shrink-0" />
+      <div className="space-y-1.5 flex-1 min-w-0">
+        <Skeleton width={90} height={18} borderRadius={999} />
+        <Skeleton width="90%" height={20} borderRadius={6} />
+        <div className="space-y-1 pt-1">
+          <Skeleton width="55%" height={12} borderRadius={4} />
+          <Skeleton width="100%" height={6} borderRadius={999} />
+        </div>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-2 pt-2 border-t border-[var(--color-border-subtle,#f0f4f2)]">
+      <Skeleton width="75%" height={40} borderRadius={10} className="bg-emerald-100/70" />
+      <Skeleton width={40} height={40} borderRadius={10} />
+    </div>
+  </div>
+);
+
+export const AILearningGuideSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center gap-2 pb-1">
+      <Skeleton width={20} height={20} borderRadius={4} />
+      <Skeleton width={140} height={18} borderRadius={6} />
+      <Skeleton width={42} height={18} borderRadius={999} />
+    </div>
+
+    <div className="flex items-center justify-between gap-3 flex-1 min-h-0">
+      <div className="space-y-2 flex-1 min-w-0">
+        <div className="space-y-1">
+          <Skeleton width={110} height={17} borderRadius={4} />
+          <Skeleton width="70%" height={12} borderRadius={4} />
+        </div>
+        <div className="space-y-1.5 pt-0.5">
+          <Skeleton width="100%" height={26} borderRadius={8} />
+          <Skeleton width="92%" height={26} borderRadius={8} />
+          <Skeleton width="85%" height={26} borderRadius={8} />
+        </div>
+      </div>
+      <div className="shrink-0 flex items-center justify-center p-2">
+        <Skeleton width={90} height={105} borderRadius={16} />
+      </div>
+    </div>
+  </div>
+);
+
+export const WeeklyGoalSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Skeleton width={18} height={18} borderRadius={4} />
+        <Skeleton width={100} height={18} borderRadius={6} />
+      </div>
+      <Skeleton width={28} height={28} borderRadius={8} />
+    </div>
+
+    <div className="flex flex-col items-center justify-center my-auto">
+      <div className="relative flex items-center justify-center size-24 rounded-full border-8 border-slate-100 animate-pulse">
+        <div className="flex flex-col items-center space-y-1">
+          <Skeleton width={38} height={20} borderRadius={4} />
+          <Skeleton width={56} height={10} borderRadius={4} />
+        </div>
+      </div>
+    </div>
+
+    <div className="flex items-center justify-between pt-2 px-1 border-t border-[var(--color-border-subtle,#f0f4f2)]">
+      {Array.from({ length: 7 }).map((_, i) => (
+        <Skeleton key={i} width={22} height={22} circle />
+      ))}
+    </div>
+  </div>
+);
+
+export const MyProgressSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center justify-between">
+      <Skeleton width={96} height={18} borderRadius={6} />
+      <Skeleton width={26} height={26} circle />
+    </div>
+
+    <div className="flex items-end justify-between gap-3 my-auto">
+      <div className="space-y-1">
+        <Skeleton width={110} height={12} borderRadius={4} />
+        <Skeleton width={68} height={28} borderRadius={6} />
+        <Skeleton width={90} height={16} borderRadius={999} />
+      </div>
+      <div className="flex-1 h-14 flex items-end gap-1.5 justify-end">
+        {[30, 45, 40, 60, 55, 75, 70, 90].map((h, i) => (
+          <div
+            key={i}
+            className="w-2.5 rounded-t bg-emerald-100 animate-pulse"
+            style={{ height: `${h}%` }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+export const UpcomingSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Skeleton width={115} height={18} borderRadius={6} />
+        <Skeleton width={24} height={18} borderRadius={999} />
+      </div>
+      <div className="flex gap-1">
+        <Skeleton width={22} height={22} borderRadius={6} />
+        <Skeleton width={22} height={22} borderRadius={6} />
+      </div>
+    </div>
+
+    <div className="space-y-2.5 my-auto">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <div key={i} className="flex items-center gap-2.5">
+          <Skeleton width={32} height={32} borderRadius={8} className="shrink-0" />
+          <div className="space-y-1 flex-1 min-w-0">
+            <Skeleton width="75%" height={13} borderRadius={4} />
+            <Skeleton width="45%" height={10} borderRadius={4} />
+          </div>
+          <Skeleton width={44} height={18} borderRadius={6} className="shrink-0" />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+export const YourStreakSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex items-center justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="space-y-2 flex-1 min-w-0 pr-2">
+      <div className="flex items-center gap-2">
+        <Skeleton width={18} height={18} borderRadius={4} />
+        <Skeleton width={96} height={18} borderRadius={6} />
+      </div>
+      <div className="space-y-1">
+        <Skeleton width={80} height={26} borderRadius={6} />
+        <Skeleton width={140} height={12} borderRadius={4} />
+      </div>
+      <div className="flex items-center gap-2 pt-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton key={i} width={18} height={18} circle />
+        ))}
+      </div>
+    </div>
+
+    <div className="shrink-0 flex items-center justify-center">
+      <Skeleton width={70} height={70} borderRadius={16} />
+    </div>
+  </div>
+);
+
+export const RecommendedCoursesSkeleton: React.FC = () => (
+  <div
+    className="h-full w-full rounded-2xl border border-[var(--color-border-subtle,#e5ebe7)] bg-white p-4 lg:p-5 flex flex-col justify-between overflow-hidden shadow-2xs"
+    aria-hidden="true"
+  >
+    <div className="flex items-center justify-between pb-3">
+      <Skeleton width={170} height={20} borderRadius={6} />
+      <div className="flex items-center gap-3">
+        <Skeleton width={60} height={16} borderRadius={4} />
+        <div className="flex gap-1.5">
+          <Skeleton width={28} height={28} borderRadius={8} />
+          <Skeleton width={28} height={28} borderRadius={8} />
+        </div>
+      </div>
+    </div>
+
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 flex-1 items-stretch min-h-0">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-[var(--color-border-subtle,#eef2f0)] p-3 flex flex-col justify-between h-full bg-[#fbfdfc]"
+        >
+          <div className="space-y-2.5">
+            <div className="relative">
+              <Skeleton width="100%" height={92} borderRadius={10} />
+              <div className="absolute top-2 right-2">
+                <Skeleton width={24} height={24} borderRadius={6} />
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Skeleton width={60} height={16} borderRadius={4} />
+              <Skeleton width={45} height={14} borderRadius={4} />
+            </div>
+            <div className="space-y-1">
+              <Skeleton width="90%" height={16} borderRadius={4} />
+              <Skeleton width="65%" height={12} borderRadius={4} />
+            </div>
+          </div>
+
+          <div className="pt-2 mt-auto border-t border-[var(--color-border-subtle,#f0f4f2)] flex items-center justify-between">
+            <Skeleton width={65} height={12} borderRadius={4} />
+            <Skeleton width={75} height={26} borderRadius={8} className="bg-emerald-100/60" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/**
+ * 1. HOME DASHBOARD SKELETON
+ * Exact 3-row, 7-slot match with DashboardBento:
+ * - Top row: Continue Learning + AI Guide + Weekly Goal
+ * - Middle row: Progress + Upcoming + Streak
+ * - Bottom row: Recommended Subjects Carousel/Grid
  */
 export const HomeDashboardSkeleton: React.FC = () => {
   return (
@@ -65,83 +301,121 @@ export const HomeDashboardSkeleton: React.FC = () => {
       {/* Top row */}
       <div className="dashboard-bento__row dashboard-bento__row--top">
         <div className="dashboard-bento__slot dashboard-bento__slot--continue">
-          <SkeletonHeroCard height="100%" className="h-full" />
+          <ContinueLearningSkeleton />
         </div>
         <div className="dashboard-bento__slot dashboard-bento__slot--ai">
-          <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-            <div className="flex items-center gap-3">
-              <Skeleton width={44} height={44} borderRadius={12} />
-              <div className="space-y-1.5 flex-1">
-                <Skeleton width="60%" height={16} borderRadius={4} />
-                <Skeleton width="40%" height={12} borderRadius={4} />
-              </div>
-            </div>
-            <div className="space-y-2 my-2">
-              <Skeleton width="90%" height={14} borderRadius={4} />
-              <Skeleton width="75%" height={14} borderRadius={4} />
-            </div>
-            <Skeleton width="100%" height={38} borderRadius={10} />
-          </SkeletonCardWrapper>
+          <AILearningGuideSkeleton />
         </div>
         <div className="dashboard-bento__slot dashboard-bento__slot--weekly">
-          <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-            <div className="flex justify-between items-center">
-              <Skeleton width={100} height={18} borderRadius={4} />
-              <Skeleton width={32} height={32} circle />
-            </div>
-            <div className="flex justify-center my-1">
-              <Skeleton width={80} height={80} circle />
-            </div>
-            <Skeleton width="100%" height={12} borderRadius={999} />
-          </SkeletonCardWrapper>
+          <WeeklyGoalSkeleton />
         </div>
       </div>
 
       {/* Middle row */}
       <div className="dashboard-bento__row dashboard-bento__row--middle">
         <div className="dashboard-bento__slot dashboard-bento__slot--progress">
-          <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-            <div className="flex justify-between items-center">
-              <Skeleton width={90} height={18} borderRadius={4} />
-              <Skeleton width={50} height={14} borderRadius={4} />
-            </div>
-            <div className="space-y-2">
-              <Skeleton width="100%" height={8} borderRadius={999} />
-              <div className="flex justify-between">
-                <Skeleton width={60} height={12} borderRadius={4} />
-                <Skeleton width={40} height={12} borderRadius={4} />
-              </div>
-            </div>
-          </SkeletonCardWrapper>
+          <MyProgressSkeleton />
         </div>
         <div className="dashboard-bento__slot dashboard-bento__slot--upcoming">
-          <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-            <div className="flex justify-between items-center">
-              <Skeleton width={120} height={18} borderRadius={4} />
-              <Skeleton width={28} height={20} borderRadius={6} />
-            </div>
-            <div className="space-y-2 my-1">
-              <Skeleton width="100%" height={28} borderRadius={6} />
-              <Skeleton width="100%" height={28} borderRadius={6} />
-            </div>
-          </SkeletonCardWrapper>
+          <UpcomingSkeleton />
         </div>
         <div className="dashboard-bento__slot dashboard-bento__slot--streak">
-          <SkeletonCardWrapper className="h-full flex items-center justify-between">
-            <div className="space-y-2">
-              <Skeleton width={110} height={18} borderRadius={4} />
-              <Skeleton width={80} height={32} borderRadius={6} />
-              <Skeleton width={140} height={12} borderRadius={4} />
-            </div>
-            <Skeleton width={64} height={64} circle />
-          </SkeletonCardWrapper>
+          <YourStreakSkeleton />
         </div>
       </div>
 
       {/* Bottom row */}
       <div className="dashboard-bento__row dashboard-bento__row--bottom">
         <div className="dashboard-bento__slot dashboard-bento__slot--recommended">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 h-full">
+          <RecommendedCoursesSkeleton />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/**
+ * 2. MY COURSES SKELETON
+ * Matches MyCoursesPage:
+ * - Status Tabs + Sort Dropdown + Search Bar in header controls
+ * - Hero banner + Weekly summary + Pace card
+ * - Grid of enrolled course cards
+ */
+export const MyCoursesSkeleton: React.FC = () => {
+  return (
+    <section className="student-page student-page--courses" aria-busy="true" aria-label="Loading your courses">
+      <div className="my-courses-workspace space-y-5">
+        {/* Top Header with Status Tabs, Sort, and Search Bar */}
+        <header className="my-courses-heading">
+          <div className="my-courses-heading__controls" aria-label="Course status controls">
+            {/* Course Status Tabs on the left */}
+            <div className="course-status-tabs flex items-center gap-1 p-1">
+              <Skeleton width={115} height={36} borderRadius={8} />
+              <Skeleton width={115} height={36} borderRadius={8} />
+              <Skeleton width={90} height={36} borderRadius={8} />
+            </div>
+
+            {/* Sort Dropdown Button */}
+            <Skeleton width={130} height={44} borderRadius={11} />
+
+            {/* Search Bar on the right */}
+            <div className="my-courses-heading__search">
+              <Skeleton width="100%" height={53} borderRadius={13} />
+            </div>
+          </div>
+        </header>
+
+        {/* Overview Row */}
+        <div className="my-courses-overview">
+          {/* Hero Focus Card */}
+          <div className="my-courses-overview__hero-slot">
+            <SkeletonHeroCard height={290} />
+          </div>
+          {/* Right Summaries */}
+          <div className="my-courses-overview__summaries-slot">
+            <div className="my-courses-overview__summaries">
+              <SkeletonCardWrapper className="h-full flex flex-col justify-between">
+                <div className="flex justify-between items-center">
+                  <Skeleton width={90} height={18} borderRadius={4} />
+                  <Skeleton width={20} height={20} borderRadius={4} />
+                </div>
+                <div className="flex gap-2 justify-center my-3">
+                  {Array.from({ length: 7 }).map((_, i) => (
+                    <Skeleton key={i} width={28} height={40} borderRadius={8} />
+                  ))}
+                </div>
+                <Skeleton width="100%" height={14} borderRadius={4} />
+              </SkeletonCardWrapper>
+
+              <SkeletonCardWrapper className="h-full flex flex-col justify-between">
+                <div className="flex justify-between items-center">
+                  <Skeleton width={90} height={18} borderRadius={4} />
+                  <Skeleton width={60} height={22} borderRadius={6} />
+                </div>
+                <Skeleton width="100%" height={60} borderRadius={8} />
+                <Skeleton width={70} height={12} borderRadius={4} />
+              </SkeletonCardWrapper>
+            </div>
+          </div>
+        </div>
+
+        {/* Grid of courses */}
+        <div className="course-library pt-2">
+          <div className="course-library__header flex justify-between items-center mb-4">
+            <div className="flex items-center gap-3">
+              <Skeleton width={180} height={22} borderRadius={6} />
+              <Skeleton width={70} height={22} borderRadius={999} />
+            </div>
+            <div className="course-library__toolbar flex items-center gap-3">
+              <div className="course-library-categories__track hidden xl:flex gap-1 p-1">
+                <Skeleton width={75} height={32} borderRadius={8} />
+                <Skeleton width={75} height={32} borderRadius={8} />
+                <Skeleton width={75} height={32} borderRadius={8} />
+              </div>
+              <Skeleton width={240} height={44} borderRadius={12} />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
@@ -154,125 +428,14 @@ export const HomeDashboardSkeleton: React.FC = () => {
 };
 
 /**
- * 2. MY COURSES SKELETON
- * Matches MyCoursesPage:
- * - Hero banner + Weekly summary + Pace card
- * - Grid of enrolled course cards
- */
-export const MyCoursesSkeleton: React.FC = () => {
-  return (
-    <section className="student-page student-page--courses" aria-busy="true" aria-label="Loading your courses">
-      <div className="my-courses-workspace space-y-5">
-        {/* Top Header with Search Bar, Status Tabs, and Sort */}
-        <header className="my-courses-heading">
-          <div className="my-courses-heading__controls">
-            {/* Search Bar on the left */}
-            <div className="my-courses-heading__search">
-              <Skeleton width="100%" height={53} borderRadius={13} />
-            </div>
-
-            {/* Course Status Tabs */}
-            <div className="course-status-tabs flex items-center gap-1 p-1">
-              <Skeleton width={115} height={36} borderRadius={8} />
-              <Skeleton width={115} height={36} borderRadius={8} />
-              <Skeleton width={90} height={36} borderRadius={8} />
-            </div>
-
-            {/* Sort Dropdown Button */}
-            <Skeleton width={130} height={44} borderRadius={11} />
-          </div>
-        </header>
-
-        {/* Overview Row */}
-        <div className="my-courses-overview">
-        {/* Hero Focus Card */}
-        <div className="my-courses-overview__hero-slot">
-          <SkeletonHeroCard height={290} />
-        </div>
-        {/* Right Summaries */}
-        <div className="my-courses-overview__summaries-slot">
-          <div className="my-courses-overview__summaries">
-            <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-              <div className="flex justify-between items-center">
-                <Skeleton width={90} height={18} borderRadius={4} />
-                <Skeleton width={20} height={20} borderRadius={4} />
-              </div>
-              <div className="flex gap-2 justify-center my-3">
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <Skeleton key={i} width={28} height={40} borderRadius={8} />
-                ))}
-              </div>
-              <Skeleton width="100%" height={14} borderRadius={4} />
-            </SkeletonCardWrapper>
-
-            <SkeletonCardWrapper className="h-full flex flex-col justify-between">
-              <div className="flex justify-between items-center">
-                <Skeleton width={90} height={18} borderRadius={4} />
-                <Skeleton width={60} height={22} borderRadius={6} />
-              </div>
-              <Skeleton width="100%" height={60} borderRadius={8} />
-              <Skeleton width="70%" height={12} borderRadius={4} />
-            </SkeletonCardWrapper>
-          </div>
-        </div>
-      </div>
-
-      {/* Grid of courses */}
-      <div className="course-library pt-2">
-        <div className="course-library__header flex justify-between items-center mb-4">
-          <div className="flex items-center gap-3">
-            <Skeleton width={180} height={22} borderRadius={6} />
-            <Skeleton width={70} height={22} borderRadius={999} />
-          </div>
-          <div className="course-library__toolbar flex items-center gap-3">
-            <div className="course-library-categories__track hidden xl:flex gap-1 p-1">
-              <Skeleton width={75} height={32} borderRadius={8} />
-              <Skeleton width={75} height={32} borderRadius={8} />
-              <Skeleton width={75} height={32} borderRadius={8} />
-            </div>
-            <Skeleton width={240} height={44} borderRadius={12} />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </div>
-      </div>
-    </div>
-  </section>
-);
-};
-
-/**
  * 2B. COURSE OVERVIEW SKELETON (Open Subject)
  * Matches CourseOverviewPage:
- * - Header with title & breadcrumbs
- * - Main 2-column layout: Hero (dark green or soft card) + Tabs + Content Cards + Sidebar modules rail
+ * - 2-column layout: Hero + Tabs + Content Cards + Sidebar modules rail
+ * - Note: Top header / breadcrumb is provided by StudentLayout
  */
 export const CourseOverviewSkeleton: React.FC = () => {
   return (
     <section className="course-overview-page" aria-busy="true" aria-label="Loading course overview">
-      <header className="course-overview-heading">
-        <div className="flex items-center gap-2 mb-2">
-          <Skeleton width={80} height={14} borderRadius={4} />
-          <Skeleton width={12} height={12} borderRadius={2} />
-          <Skeleton width={140} height={14} borderRadius={4} />
-        </div>
-        <div className="course-overview-heading__row">
-          <div className="space-y-2">
-            <Skeleton width={260} height={32} borderRadius={6} />
-            <div className="flex items-center gap-3">
-              <Skeleton width={110} height={14} borderRadius={4} />
-              <Skeleton width={80} height={14} borderRadius={4} />
-              <Skeleton width={90} height={14} borderRadius={4} />
-            </div>
-          </div>
-          <Skeleton width={44} height={44} borderRadius={11} />
-        </div>
-      </header>
-
       <div className="course-overview-layout">
         <div className="course-overview-primary">
           {/* Hero Card */}
@@ -343,30 +506,13 @@ export const CourseOverviewSkeleton: React.FC = () => {
 /**
  * 2C. LESSON PLAYER SKELETON (Continue Lesson / Lesson Player)
  * Matches LessonPlayerPage:
- * - Header with lesson info & actions
  * - Big Video Player container
  * - Tabs & Tab panels + Sidebar lesson playlist
+ * - Note: Top header / breadcrumb is provided by StudentLayout
  */
 export const LessonPlayerSkeleton: React.FC = () => {
   return (
     <section className="course-overview-page lesson-player-page" aria-busy="true" aria-label="Loading lesson player">
-      <header className="course-overview-heading">
-        <div className="course-overview-heading__row">
-          <div className="space-y-2">
-            <Skeleton width={320} height={30} borderRadius={6} />
-            <div className="flex items-center gap-3">
-              <Skeleton width={120} height={14} borderRadius={4} />
-              <Skeleton width={140} height={14} borderRadius={4} />
-              <Skeleton width={70} height={14} borderRadius={4} />
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Skeleton width={44} height={44} borderRadius={11} />
-            <Skeleton width={44} height={44} borderRadius={11} />
-          </div>
-        </div>
-      </header>
-
       <div className="course-overview-layout">
         <div className="course-overview-primary">
           {/* Big Video Player Canvas */}
@@ -422,6 +568,111 @@ export const LessonPlayerSkeleton: React.FC = () => {
         </aside>
       </div>
     </section>
+  );
+};
+
+/**
+ * 2D. ASSIGNMENT DETAIL SKELETON
+ * Matches AssignmentDetailPage:
+ * - Metrics row: 4 cards (Points, Estimated time, Attempts, Submission type)
+ * - Main 2-column layout: Brief & What to submit + Right submission action & rubric rail
+ */
+export const AssignmentDetailSkeleton: React.FC = () => {
+  return (
+    <div className="assignment-detail-page p-4 sm:p-6 space-y-6" aria-busy="true" aria-label="Loading assignment details">
+      {/* 4 Metric Cards Row */}
+      <section className="assignment-detail-metric-strip">
+        <div className="assignment-detail-metrics-grid">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="assignment-detail-metric-card">
+              <Skeleton width={44} height={44} borderRadius={12} className="shrink-0" />
+              <div className="assignment-detail-metric-content space-y-1 flex-1">
+                <Skeleton width={60} height={12} borderRadius={4} />
+                <Skeleton width={80} height={20} borderRadius={4} />
+                <Skeleton width={90} height={10} borderRadius={4} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Body Layout */}
+      <div className="assignment-detail-body-layout">
+        {/* Main Column */}
+        <div className="assignment-detail-main-column space-y-6">
+          {/* Brief Row */}
+          <div className="assignment-detail-brief-row">
+            {/* Brief Card */}
+            <div className="assignment-detail-section-card assignment-detail-brief-card space-y-4">
+              <div className="flex items-center gap-2">
+                <Skeleton width={20} height={20} borderRadius={4} />
+                <Skeleton width={140} height={20} borderRadius={6} />
+              </div>
+              <SkeletonText lines={3} />
+              <div className="space-y-2 pt-2">
+                <Skeleton width={120} height={16} borderRadius={4} />
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Skeleton width={16} height={16} circle />
+                    <Skeleton width="85%" height={14} borderRadius={4} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* What to Submit Card */}
+            <div className="assignment-detail-section-card assignment-detail-submit-info-card space-y-4">
+              <div className="flex items-center gap-2">
+                <Skeleton width={20} height={20} borderRadius={4} />
+                <Skeleton width={130} height={20} borderRadius={6} />
+              </div>
+              <SkeletonText lines={4} />
+              <div className="p-3 rounded-xl bg-gray-50 space-y-2">
+                <Skeleton width={90} height={14} borderRadius={4} />
+                <Skeleton width="70%" height={12} borderRadius={4} />
+              </div>
+            </div>
+          </div>
+
+          {/* Resources Card */}
+          <div className="assignment-detail-section-card space-y-3">
+            <Skeleton width={180} height={20} borderRadius={6} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {Array.from({ length: 2 }).map((_, i) => (
+                <div key={i} className="flex items-center gap-3 p-3 rounded-xl border border-[#dfe9e4] bg-[#fbfdfc]">
+                  <Skeleton width={36} height={36} borderRadius={8} />
+                  <div className="space-y-1.5 flex-1">
+                    <Skeleton width="80%" height={14} borderRadius={4} />
+                    <Skeleton width="40%" height={11} borderRadius={4} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Rail */}
+        <aside className="assignment-detail-sidebar space-y-4">
+          <div className="assignment-detail-section-card space-y-4">
+            <Skeleton width={120} height={18} borderRadius={6} />
+            <Skeleton width="100%" height={44} borderRadius={12} className="bg-emerald-100/70" />
+            <Skeleton width="100%" height={36} borderRadius={10} />
+          </div>
+
+          <div className="assignment-detail-section-card space-y-3">
+            <Skeleton width={140} height={18} borderRadius={6} />
+            <div className="space-y-2">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="flex justify-between items-center p-2 rounded-lg bg-gray-50">
+                  <Skeleton width="60%" height={14} borderRadius={4} />
+                  <Skeleton width={40} height={14} borderRadius={4} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
   );
 };
 

@@ -50,28 +50,6 @@ export function StudentLayout() {
     return <MobileLayout />;
   }
 
-  // While viewport is being measured, render the desktop shell so the sidebar
-  // and header chrome are always visible — never return null (which strips layout).
-  if (isMobile === undefined) {
-    return (
-      <AppShell>
-        <div className="student-dashboard student-dashboard--home">
-          <header className="student-dashboard__header student-dashboard__header--home" aria-label="Student dashboard header">
-            <div className="student-dashboard__search">
-              {/* Search bar skeleton */}
-              <div style={{ height: 40, borderRadius: 10, background: 'var(--color-bg-muted, #f0f4f2)', opacity: 0.7 }} />
-            </div>
-            <div className="student-dashboard__actions">
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--color-bg-muted, #f0f4f2)', opacity: 0.7 }} />
-            </div>
-          </header>
-          <div className="student-dashboard__content">
-            <RouteLoadingFallback />
-          </div>
-        </div>
-      </AppShell>
-    );
-  }
 
   const courseRouteMatch = pathname.match(/^\/my-courses\/([^/]+)(?:\/lessons\/([^/]+))?$/);
   const courseRouteState = location.state as { courseTitle?: unknown; courseId?: unknown } | null;
@@ -263,7 +241,12 @@ export function StudentLayout() {
             renderBreadcrumb()
           )}
           <div className="student-dashboard__actions">
-            {auth.status === "authenticated" ? (
+            {auth.status === "loading" ? (
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-8 rounded-full bg-slate-100 animate-pulse" />
+                <div className="w-9 h-9 rounded-full bg-slate-100 animate-pulse" />
+              </div>
+            ) : auth.status === "authenticated" ? (
               <UserHeaderActions
                 avatarSrc="https://i.pravatar.cc/112?img=47"
                 avatarAlt="Student account"

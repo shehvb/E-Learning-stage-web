@@ -10,8 +10,5 @@ import { MobileNotFoundScreen } from "../../../components/mobile/screens/MobileN
 export function NotFoundPage() {
   const isMobile = useIsMobile();
 
-  // Prevent flash while measuring initial viewport
-  if (isMobile === undefined) return null;
-
   return isMobile ? <MobileNotFoundScreen /> : <NotFound />;
 }
